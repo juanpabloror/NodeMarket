@@ -1,0 +1,61 @@
+{
+  "leyenda": "TODO: leyenda de IVA (precios con/sin IVA incluido)",
+  "stages": [
+    {
+      "id": "piloto",
+      "nombre": "Piloto Basic",
+      "estado": "abierta",
+      "condicion": "Solo 3 negocios · 60 días",
+      "implementacion": 990,
+      "implementacionTexto": null,
+      "mensualidad": 0,
+      "mensualidadTexto": "$0 durante el piloto",
+      "mensualidadSufijo": "",
+      "cupoTotal": 3,
+      "cupoDisponible": 3,
+      "cupoTexto": "Quedan 3 de 3 lugares"
+    },
+    {
+      "id": "fundadores",
+      "nombre": "Fundadores",
+      "estado": "proximamente",
+      "condicion": "Primeros 5 clientes de pago",
+      "implementacion": 1990,
+      "implementacionTexto": null,
+      "mensualidad": 990,
+      "mensualidadTexto": null,
+      "mensualidadSufijo": " al mes",
+      "cupoTotal": 5,
+      "cupoDisponible": 5,
+      "cupoTexto": "Quedan 5 de 5 lugares"
+    },
+    {
+      "id": "oferta-formal",
+      "nombre": "Oferta formal",
+      "estado": "proximamente",
+      "condicion": "Próximamente",
+      "implementacion": null,
+      "implementacionTexto": "Próximamente",
+      "mensualidad": null,
+      "mensualidadTexto": "Próximamente",
+      "mensualidadSufijo": "",
+      "cupoTotal": null,
+      "cupoDisponible": null,
+      "cupoTexto": null
+    },
+    {
+      "id": "premium",
+      "nombre": "Premium",
+      "estado": "proximamente",
+      "condicion": "Proyecto a medida · cotización",
+      "implementacion": null,
+      "implementacionTexto": "Cotización",
+      "mensualidad": null,
+      "mensualidadTexto": "Cotización",
+      "mensualidadSufijo": "",
+      "cupoTotal": null,
+      "cupoDisponible": null,
+      "cupoTexto": null
+    }
+  ]
+}

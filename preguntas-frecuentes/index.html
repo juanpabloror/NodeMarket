@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <!--@include head-shared-->
+    <title>Preguntas frecuentes — Node Market</title>
+    <meta
+      name="description"
+      content="Resolvemos las dudas más comunes sobre el piloto, los servicios y cómo trabajar con Node Market."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Preguntas frecuentes — Node Market" />
+    <meta property="og:description" content="Dudas comunes sobre el piloto y los servicios de Node Market." />
+    <meta property="og:url" content="{{ site.marca.dominio }}/preguntas-frecuentes/" />
+  </head>
+  <body data-page="faq">
+    <!--@include header-->
+
+    <div id="node-scene" aria-hidden="true"></div>
+    <noscript>
+      <img class="node-scene-fallback" src="/src/assets/fallback-network.svg" alt="" />
+    </noscript>
+
+    <main id="contenido" data-page="faq" data-formation="calma">
+      <section class="page-hero container">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h1>Dudas comunes, respuestas claras</h1>
+      </section>
+
+      <section class="section container">
+        <div class="faq-list">
+          <!--@each site.faq as item-->
+          <details class="faq-item">
+            <summary>{{ item.pregunta }}</summary>
+            <p>{{ item.respuesta }}</p>
+          </details>
+          <!--@endeach-->
+        </div>
+      </section>
+    </main>
+
+    <!--@include footer-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

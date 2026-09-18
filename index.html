@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <!--@include head-shared-->
+    <title>Node Market — Tu negocio, conectado</title>
+    <meta
+      name="description"
+      content="Node Market desarrolla apps, sitios web, redes sociales y contenido a la medida para negocios locales en México. Sin plantillas, sin tecnicismos."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Node Market — Tu negocio, conectado" />
+    <meta
+      property="og:description"
+      content="Desarrollo de apps, sitios web, redes sociales y contenido a la medida para negocios locales."
+    />
+    <meta property="og:url" content="{{ site.marca.dominio }}" />
+    <meta property="og:image" content="TODO: imagen Open Graph 1200x630 (src/assets/og-image.jpg)" />
+    <meta property="og:locale" content="es_MX" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "{{ site.marca.nombre }}",
+        "description": "{{ site.marca.descripcionCorta }}",
+        "url": "{{ site.marca.dominio }}",
+        "email": "{{ site.contacto.email }}",
+        "areaServed": "{{ site.contacto.ciudad }}",
+        "sameAs": ["{{ site.contacto.redes.instagram }}", "{{ site.contacto.redes.facebook }}", "{{ site.contacto.redes.tiktok }}"]
+      }
+    </script>
+  </head>
+  <body data-page="inicio">
+    <!--@include header-->
+
+    <div id="node-scene" aria-hidden="true"></div>
+    <noscript>
+      <img class="node-scene-fallback" src="/src/assets/fallback-network.svg" alt="" />
+    </noscript>
+
+    <main id="contenido" data-page="inicio" data-formation="ciudad">
+      <section class="hero container">
+        <p class="hero__eyebrow">Node Market</p>
+        <h1>Tu negocio, <em>conectado</em>.</h1>
+        <p class="hero__lead">
+          Desarrollamos aplicaciones, sitios web, redes sociales y contenido a la medida para negocios locales.
+          Cada negocio es un nodo; nosotros lo conectamos con sus clientes.
+        </p>
+        <div class="hero__actions">
+          <a
+            class="btn btn--accent btn--lg"
+            href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+            target="_blank"
+            rel="noopener"
+          >
+            Hablar por WhatsApp
+          </a>
+          <a class="btn btn--ghost btn--lg" href="/servicios/">Ver servicios</a>
+        </div>
+      </section>
+
+      <section class="section container">
+        <div class="section__head">
+          <p class="eyebrow">Qué hacemos</p>
+          <h2>Cuatro formas de conectar tu negocio</h2>
+        </div>
+        <div class="service-grid">
+          <!--@each site.servicios as servicio-->
+          <article class="service-card">
+            <p class="service-card__index">0{{ servicioIndex }}</p>
+            <h3>{{ servicio.nombre }}</h3>
+            <p>{{ servicio.resumen }}</p>
+          </article>
+          <!--@endeach-->
+        </div>
+      </section>
+
+      <section class="section section--veil">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow">Piloto</p>
+            <h2>Sé uno de los primeros 3 negocios</h2>
+            <p class="hero__lead">
+              Durante el piloto trabajamos de cerca contigo, sin costo mensual, para construir algo que realmente
+              funcione para tu negocio.
+            </p>
+          </div>
+          <a class="btn btn--accent btn--lg" href="/paquetes/">Ver el piloto</a>
+        </div>
+      </section>
+    </main>
+
+    <!--@include footer-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <!--@include head-shared-->
+    <title>Paquetes — Node Market</title>
+    <meta
+      name="description"
+      content="Conoce las etapas de Node Market: piloto, fundadores, oferta formal y premium. Cupos y precios claros, sin letras chiquitas."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Paquetes — Node Market" />
+    <meta property="og:description" content="Etapas, cupos y precios de Node Market para negocios locales." />
+    <meta property="og:url" content="{{ site.marca.dominio }}/paquetes/" />
+  </head>
+  <body data-page="paquetes">
+    <!--@include header-->
+
+    <div id="node-scene" aria-hidden="true"></div>
+    <noscript>
+      <img class="node-scene-fallback" src="/src/assets/fallback-network.svg" alt="" />
+    </noscript>
+
+    <main id="contenido" data-page="paquetes" data-formation="ruta">
+      <section class="page-hero container">
+        <p class="eyebrow">Paquetes</p>
+        <h1>Una ruta clara, sin letras chiquitas</h1>
+        <p>Empezamos con un piloto para 3 negocios. Conforme avanzamos, se abren nuevas etapas.</p>
+      </section>
+
+      <section class="section container">
+        <div class="pricing-path">
+          <!--@each pricing.stages as stage-->
+          <article class="pricing-stage" data-estado="{{ stage.estado }}">
+            <span class="pricing-stage__node"></span>
+            <span class="badge badge--{{ stage.estado }}">{{ stage.condicion }}</span>
+            <h3>{{ stage.nombre }}</h3>
+            <p class="pricing-stage__precio">{{ stage.implementacion | mxn:stage.implementacionTexto }}</p>
+            <p class="pricing-stage__mensualidad">{{ stage.mensualidad | mxn:stage.mensualidadTexto }}{{ stage.mensualidadSufijo }}</p>
+            <p class="pricing-stage__cupo">{{ stage.cupoTexto }}</p>
+          </article>
+          <!--@endeach-->
+        </div>
+        <p class="hero__lead" style="margin-top: var(--space-lg)">{{ pricing.leyenda }}</p>
+      </section>
+
+      <section class="section section--veil">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow">¿Listo para empezar?</p>
+            <h2>Aparta uno de los 3 lugares del piloto</h2>
+          </div>
+          <a
+            class="btn btn--accent btn--lg"
+            href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+            target="_blank"
+            rel="noopener"
+          >
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!--@include footer-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

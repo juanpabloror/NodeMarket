@@ -1,0 +1,81 @@
+{
+  "marca": {
+    "nombre": "Node Market",
+    "tagline": "Tu negocio, conectado.",
+    "descripcionCorta": "Desarrollamos apps, sitios web, redes sociales y contenido a la medida para negocios locales.",
+    "dominio": "TODO: dominio del sitio (ej. nodemarket.mx)"
+  },
+  "contacto": {
+    "whatsappNumero": "TODO: número de WhatsApp con lada, sin espacios ni signos (ej. 5215512345678)",
+    "whatsappMensaje": "Hola, quiero conectar mi negocio con Node Market",
+    "email": "TODO: correo de contacto",
+    "ciudad": "TODO: ciudad o zona de cobertura",
+    "horario": "TODO: horario de atención",
+    "redes": {
+      "instagram": "TODO: URL de Instagram",
+      "facebook": "TODO: URL de Facebook",
+      "tiktok": "TODO: URL de TikTok"
+    }
+  },
+  "nav": [
+    { "label": "Inicio", "href": "/" },
+    { "label": "Servicios", "href": "/servicios/" },
+    { "label": "Paquetes", "href": "/paquetes/" },
+    { "label": "Portafolio", "href": "/portafolio/" },
+    { "label": "Nosotros", "href": "/nosotros/" },
+    { "label": "Preguntas frecuentes", "href": "/preguntas-frecuentes/" },
+    { "label": "Contacto", "href": "/contacto/" }
+  ],
+  "servicios": [
+    {
+      "id": "aplicaciones",
+      "nombre": "Desarrollo de aplicaciones",
+      "resumen": "Apps a la medida para pedidos, reservas o control interno, pensadas para cómo trabaja tu negocio.",
+      "detalle": "Nada de plantillas genéricas: construimos la app alrededor de tu manera de operar, para que tu equipo la use sin fricción desde el primer día."
+    },
+    {
+      "id": "sitios-web",
+      "nombre": "Sitios web",
+      "resumen": "Sitios rápidos y claros que explican qué haces y facilitan que te contacten.",
+      "detalle": "Diseño propio, sin plantillas de terceros. Tu sitio se ve y se siente como tu negocio, no como una copia de otro."
+    },
+    {
+      "id": "redes-sociales",
+      "nombre": "Manejo de redes sociales",
+      "resumen": "Calendario, publicaciones y respuesta a mensajes, para que tus redes trabajen todos los días.",
+      "detalle": "Planeamos contenido pensado en tus clientes reales, no en tendencias genéricas que no aplican a tu negocio."
+    },
+    {
+      "id": "contenido-multimedia",
+      "nombre": "Contenido multimedia",
+      "resumen": "Fotografía, video y piezas gráficas para que tu negocio se vea profesional en todos lados.",
+      "detalle": "Producimos contenido propio de tu negocio: tu espacio, tus productos, tu gente. Nada de bancos de imágenes."
+    }
+  ],
+  "faq": [
+    {
+      "pregunta": "¿Qué pasa al terminar los 60 días del piloto?",
+      "respuesta": "TODO: respuesta pendiente de definir con el equipo de Node Market."
+    },
+    {
+      "pregunta": "¿Necesito saber de tecnología para trabajar con ustedes?",
+      "respuesta": "No. Te explicamos todo en español claro, sin tecnicismos, y tú te enfocas en tu negocio."
+    },
+    {
+      "pregunta": "¿Qué incluye el piloto?",
+      "respuesta": "Un sitio o app a la medida, según lo que necesite tu negocio, con acompañamiento durante los 60 días."
+    },
+    {
+      "pregunta": "¿Puedo pedir solo un servicio y no todos?",
+      "respuesta": "Sí. Armamos la solución según lo que tu negocio necesite, no un paquete cerrado."
+    },
+    {
+      "pregunta": "¿Cómo empiezo?",
+      "respuesta": "Escríbenos por WhatsApp y platicamos qué necesita tu negocio, sin compromiso."
+    }
+  ],
+  "nosotros": {
+    "historia": "Node Market nació para que los negocios locales tengan presencia digital tan cuidada como la de cualquier marca grande, sin pagar de más ni batallar con plantillas genéricas.",
+    "vision": "Vemos cada negocio como un nodo: un punto propio que, bien conectado, llega a más clientes sin perder lo que lo hace único."
+  }
+}

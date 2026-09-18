@@ -1,0 +1,32 @@
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-logo" aria-label="Node Market — inicio">
+      <!--@include logo-icon-->
+      <span class="site-logo__word"><b>NODE</b><span>MARK</span></span>
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input visually-hidden" />
+    <label for="nav-toggle" class="nav-toggle">
+      <span class="visually-hidden">Abrir menú</span>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </label>
+
+    <nav class="site-nav" aria-label="Principal">
+      <ul>
+        <!--@each site.nav as item-->
+        <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+        <!--@endeach-->
+      </ul>
+      <a
+        class="btn btn--accent site-nav__cta"
+        href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+        target="_blank"
+        rel="noopener"
+      >
+        Escríbenos
+      </a>
+    </nav>
+  </div>
+</header>

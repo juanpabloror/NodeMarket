@@ -1,0 +1,74 @@
+:root {
+  /* — marca — */
+  --color-brand: #5d72ff;
+  --color-brand-light: #8b9bff;
+  --color-brand-dark: #4356d6;
+
+  /* — tinta (fondos oscuros) — */
+  --color-ink-950: #05060b;
+  --color-ink-900: #0a0c16;
+  --color-ink-800: #13172a;
+  --color-ink-700: #1f2440;
+
+  /* — escena de nodos — */
+  --color-node-amber: #f5a35a;
+  --color-node-amber-dim: #a86a3a;
+  --color-pulse: #f3f6ff;
+
+  /* — neutros — */
+  --color-paper: #fafafa;
+  --color-ink-text: #0b0b0d;
+  --color-gray-300: #b9bec9;
+  --color-gray-500: #7a8093;
+  --color-gray-700: #444a5a;
+
+  /* — semánticos — */
+  --color-bg: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-surface-raised: var(--color-ink-800);
+  --color-text: var(--color-paper);
+  --color-text-muted: color-mix(in srgb, var(--color-paper) 68%, transparent);
+  --color-border: color-mix(in srgb, var(--color-paper) 14%, transparent);
+  --color-accent: var(--color-brand);
+  --color-focus: var(--color-brand-light);
+  --color-veil: color-mix(in srgb, var(--color-ink-950) 55%, transparent);
+
+  /* — tipografía — */
+  --font-display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --font-heading: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.18rem + 0.35vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.45rem + 0.75vw, 2.1rem);
+  --step-3: clamp(2.1rem, 1.8rem + 1.5vw, 3rem);
+  --step-4: clamp(2.75rem, 2.2rem + 2.75vw, 4.5rem);
+  --step-5: clamp(3.4rem, 2.5rem + 4.5vw, 6.25rem);
+
+  /* — espaciado fluido — */
+  --space-2xs: clamp(0.5rem, 0.47rem + 0.15vw, 0.625rem);
+  --space-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.9375rem);
+  --space-sm: clamp(1rem, 0.93rem + 0.35vw, 1.25rem);
+  --space-md: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+  --space-lg: clamp(2.25rem, 1.95rem + 1.5vw, 3.25rem);
+  --space-xl: clamp(3.5rem, 2.9rem + 3vw, 5.5rem);
+  --space-2xl: clamp(5rem, 3.9rem + 5.5vw, 8.5rem);
+
+  /* — layout — */
+  --content-max: 74rem;
+  --content-padding: clamp(1.25rem, 4vw, 3rem);
+
+  /* — movimiento — */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+  --duration-slow: 1.2s;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-full: 999px;
+
+  color-scheme: dark;
+}

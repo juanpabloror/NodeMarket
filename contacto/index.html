@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <!--@include head-shared-->
+    <title>Contacto — Node Market</title>
+    <meta
+      name="description"
+      content="Escríbenos por WhatsApp o cuéntanos sobre tu negocio con el formulario y platicamos sin compromiso."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Contacto — Node Market" />
+    <meta property="og:description" content="Conecta tu negocio con Node Market por WhatsApp o formulario." />
+    <meta property="og:url" content="{{ site.marca.dominio }}/contacto/" />
+  </head>
+  <body data-page="contacto">
+    <!--@include header-->
+
+    <div id="node-scene" aria-hidden="true"></div>
+    <noscript>
+      <img class="node-scene-fallback" src="/src/assets/fallback-network.svg" alt="" />
+    </noscript>
+
+    <main id="contenido" data-page="contacto" data-formation="converge">
+      <section class="page-hero container">
+        <p class="eyebrow">Contacto</p>
+        <h1>Conectemos tu negocio</h1>
+        <p>Escríbenos directo por WhatsApp o cuéntanos con el formulario y te respondemos por ahí.</p>
+      </section>
+
+      <section class="section container">
+        <div class="grid-2">
+          <div>
+            <a
+              class="btn btn--accent btn--lg"
+              href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+              target="_blank"
+              rel="noopener"
+            >
+              Hablar por WhatsApp
+            </a>
+            <p class="hero__lead" style="margin-top: var(--space-md)">
+              También puedes escribirnos a
+              <a href="mailto:{{ site.contacto.email }}">{{ site.contacto.email }}</a>.
+            </p>
+          </div>
+
+          <form id="contact-form" data-whatsapp="{{ site.contacto.whatsappNumero }}" novalidate>
+            <div class="form-field">
+              <label for="nombre">Tu nombre</label>
+              <input type="text" id="nombre" name="nombre" required autocomplete="name" />
+            </div>
+            <div class="form-field">
+              <label for="negocio">Nombre de tu negocio</label>
+              <input type="text" id="negocio" name="negocio" required autocomplete="organization" />
+            </div>
+            <div class="form-field">
+              <label for="mensaje">¿Qué necesita tu negocio?</label>
+              <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--accent">Enviar por WhatsApp</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!--@include footer-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <!--@include head-shared-->
+    <title>Servicios — Node Market</title>
+    <meta
+      name="description"
+      content="Desarrollo de aplicaciones, sitios web, manejo de redes sociales y contenido multimedia a la medida, sin plantillas genéricas."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Servicios — Node Market" />
+    <meta
+      property="og:description"
+      content="Soluciones a la medida para negocios locales: apps, sitios web, redes sociales y contenido."
+    />
+    <meta property="og:url" content="{{ site.marca.dominio }}/servicios/" />
+  </head>
+  <body data-page="servicios">
+    <!--@include header-->
+
+    <div id="node-scene" aria-hidden="true"></div>
+    <noscript>
+      <img class="node-scene-fallback" src="/src/assets/fallback-network.svg" alt="" />
+    </noscript>
+
+    <main id="contenido" data-page="servicios" data-formation="constelaciones">
+      <section class="page-hero container">
+        <p class="eyebrow">Servicios</p>
+        <h1>Soluciones a la medida, no plantillas</h1>
+        <p>Cuatro formas de conectar tu negocio con más clientes, cada una construida alrededor de cómo trabajas.</p>
+      </section>
+
+      <section class="section container">
+        <div class="service-grid">
+          <!--@each site.servicios as servicio-->
+          <article class="service-card" id="{{ servicio.id }}" tabindex="-1">
+            <p class="service-card__index">0{{ servicioIndex }}</p>
+            <h2>{{ servicio.nombre }}</h2>
+            <p>{{ servicio.resumen }}</p>
+            <p>{{ servicio.detalle }}</p>
+          </article>
+          <!--@endeach-->
+        </div>
+      </section>
+
+      <section class="section section--veil">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow">¿Cómo empezamos?</p>
+            <h2>Platicamos qué necesita tu negocio, sin compromiso</h2>
+          </div>
+          <a
+            class="btn btn--accent btn--lg"
+            href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+            target="_blank"
+            rel="noopener"
+          >
+            Hablar por WhatsApp
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!--@include footer-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

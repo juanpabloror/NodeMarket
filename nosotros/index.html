@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <!--@include head-shared-->
+    <title>Nosotros — Node Market</title>
+    <meta
+      name="description"
+      content="Node Market conecta negocios locales con sus clientes a través de desarrollo, redes sociales y contenido a la medida."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Nosotros — Node Market" />
+    <meta property="og:description" content="Por qué existe Node Market y cómo vemos a cada negocio como un nodo." />
+    <meta property="og:url" content="{{ site.marca.dominio }}/nosotros/" />
+  </head>
+  <body data-page="nosotros">
+    <!--@include header-->
+
+    <div id="node-scene" aria-hidden="true"></div>
+    <noscript>
+      <img class="node-scene-fallback" src="/src/assets/fallback-network.svg" alt="" />
+    </noscript>
+
+    <main id="contenido" data-page="nosotros" data-formation="calma">
+      <section class="page-hero container">
+        <p class="eyebrow">Nosotros</p>
+        <h1>Cada negocio es un nodo</h1>
+      </section>
+
+      <section class="section container">
+        <div class="grid-2">
+          <div>
+            <h2>Por qué existimos</h2>
+            <p>{{ site.nosotros.historia }}</p>
+          </div>
+          <div>
+            <h2>Cómo vemos tu negocio</h2>
+            <p>{{ site.nosotros.vision }}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!--@include footer-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <!--@include head-shared-->
+    <title>Portafolio — Node Market</title>
+    <meta
+      name="description"
+      content="Node Market está formando su primer portafolio junto a 3 negocios piloto. Sé parte de los primeros casos reales."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Portafolio — Node Market" />
+    <meta property="og:description" content="Sé uno de los 3 negocios piloto de Node Market." />
+    <meta property="og:url" content="{{ site.marca.dominio }}/portafolio/" />
+  </head>
+  <body data-page="portafolio">
+    <!--@include header-->
+
+    <div id="node-scene" aria-hidden="true"></div>
+    <noscript>
+      <img class="node-scene-fallback" src="/src/assets/fallback-network.svg" alt="" />
+    </noscript>
+
+    <main id="contenido" data-page="portafolio" data-formation="calma">
+      <section class="page-hero container">
+        <p class="eyebrow">Portafolio</p>
+        <h1>Estamos construyendo nuestros primeros casos</h1>
+        <p>Todavía no tenemos proyectos publicados: los primeros 3 negocios piloto serán nuestro primer portafolio.</p>
+      </section>
+
+      <section class="section container">
+        <div class="piloto-callout">
+          <p class="eyebrow">Piloto Basic</p>
+          <h2>Sé uno de los 3 negocios piloto</h2>
+          <p class="hero__lead">
+            Trabajamos contigo de cerca durante 60 días, sin costo mensual, y tu negocio se convierte en uno de
+            nuestros primeros casos reales.
+          </p>
+          <a
+            class="btn btn--accent btn--lg"
+            href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+            target="_blank"
+            rel="noopener"
+          >
+            Quiero ser piloto
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!--@include footer-->
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

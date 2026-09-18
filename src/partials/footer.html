@@ -1,0 +1,35 @@
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a href="/" class="site-logo" aria-label="Node Market — inicio">
+        <!--@include logo-icon-->
+        <span class="site-logo__word"><b>NODE</b><span>MARK</span></span>
+      </a>
+      <p>{{ site.marca.descripcionCorta }}</p>
+    </div>
+
+    <div>
+      <h3>Navegación</h3>
+      <ul>
+        <!--@each site.nav as item-->
+        <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+        <!--@endeach-->
+      </ul>
+    </div>
+
+    <div>
+      <h3>Contacto</h3>
+      <ul>
+        <li><a href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="mailto:{{ site.contacto.email }}">{{ site.contacto.email }}</a></li>
+        <li><a href="{{ site.contacto.redes.instagram }}" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="{{ site.contacto.redes.facebook }}" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <span>© <span id="year">2026</span> Node Market. Todos los derechos reservados.</span>
+    <span>{{ site.contacto.ciudad }}</span>
+  </div>
+</footer>
