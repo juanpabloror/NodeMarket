@@ -36,13 +36,13 @@
 
     <main id="contenido" data-page="inicio" data-formation="ciudad">
       <section class="hero container">
-        <p class="hero__eyebrow">Node Market</p>
-        <h1>Tu negocio, <em>conectado</em>.</h1>
-        <p class="hero__lead">
+        <p data-reveal class="hero__eyebrow">Node Market</p>
+        <h1 data-split>Tu negocio, <em>conectado</em>.</h1>
+        <p data-reveal class="hero__lead">
           Desarrollamos aplicaciones, sitios web, redes sociales y contenido a la medida para negocios locales.
           Cada negocio es un nodo; nosotros lo conectamos con sus clientes.
         </p>
-        <div class="hero__actions">
+        <div data-reveal class="hero__actions">
           <a
             class="btn btn--accent btn--lg"
             href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
@@ -57,10 +57,10 @@
 
       <section class="section container">
         <div class="section__head">
-          <p class="eyebrow">Qué hacemos</p>
-          <h2>Cuatro formas de conectar tu negocio</h2>
+          <p data-reveal class="eyebrow">Qué hacemos</p>
+          <h2 data-split>Cuatro formas de conectar tu negocio</h2>
         </div>
-        <div class="service-grid">
+        <div data-stagger class="service-grid">
           <!--@each site.servicios as servicio-->
           <article class="service-card">
             <p class="service-card__index">0{{ servicioIndex }}</p>
@@ -74,14 +74,14 @@
       <section class="section section--veil">
         <div class="container">
           <div class="section__head">
-            <p class="eyebrow">Piloto</p>
-            <h2>Sé uno de los primeros 3 negocios</h2>
-            <p class="hero__lead">
+            <p data-reveal class="eyebrow">Piloto</p>
+            <h2 data-split>Sé uno de los primeros 3 negocios</h2>
+            <p data-reveal class="hero__lead">
               Durante el piloto trabajamos de cerca contigo, sin costo mensual, para construir algo que realmente
               funcione para tu negocio.
             </p>
           </div>
-          <a class="btn btn--accent btn--lg" href="/paquetes/">Ver el piloto</a>
+          <a data-reveal class="btn btn--accent btn--lg" href="/paquetes/">Ver el piloto</a>
         </div>
       </section>
     </main>

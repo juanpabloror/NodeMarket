@@ -1,11 +1,9 @@
+import { definePage } from '../dom/page.js';
 import { setState } from '../../state.js';
 
-let cards = [];
-let cleanups = [];
-
-export function init() {
-  cards = [...document.querySelectorAll('.service-card')];
-  cleanups = cards.flatMap((card, index) => {
+// Hover/foco en una tarjeta ilumina su constelación en la escena.
+export const { init, destroy } = definePage((container) => {
+  const cleanups = [...container.querySelectorAll('.service-card')].flatMap((card, index) => {
     const enter = () => setState({ activeGroup: index });
     const leave = () => setState({ activeGroup: -1 });
     card.addEventListener('pointerenter', enter);
@@ -19,10 +17,9 @@ export function init() {
       () => card.removeEventListener('focusout', leave),
     ];
   });
-}
 
-export function destroy() {
-  cleanups.forEach((fn) => fn());
-  cleanups = [];
-  setState({ activeGroup: -1 });
-}
+  return () => {
+    cleanups.forEach((cleanup) => cleanup());
+    setState({ activeGroup: -1 });
+  };
+});

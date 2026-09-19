@@ -19,13 +19,13 @@
 
     <main id="contenido" data-page="paquetes" data-formation="ruta">
       <section class="page-hero container">
-        <p class="eyebrow">Paquetes</p>
-        <h1>Una ruta clara, sin letras chiquitas</h1>
-        <p>Empezamos con un piloto para 3 negocios. Conforme avanzamos, se abren nuevas etapas.</p>
+        <p data-reveal class="eyebrow">Paquetes</p>
+        <h1 data-split>Una ruta clara, sin letras chiquitas</h1>
+        <p data-reveal>Empezamos con un piloto para 3 negocios. Conforme avanzamos, se abren nuevas etapas.</p>
       </section>
 
       <section class="section container">
-        <div class="pricing-path">
+        <div data-stagger class="pricing-path">
           <!--@each pricing.stages as stage-->
           <article
             class="pricing-stage"
@@ -43,17 +43,17 @@
           </article>
           <!--@endeach-->
         </div>
-        <p class="hero__lead" style="margin-top: var(--space-lg)">{{ pricing.leyenda }}</p>
+        <p data-reveal class="hero__lead" style="margin-top: var(--space-lg)">{{ pricing.leyenda }}</p>
       </section>
 
       <section class="section section--veil">
         <div class="container">
           <div class="section__head">
-            <p class="eyebrow">¿Listo para empezar?</p>
-            <h2>Aparta uno de los 3 lugares del piloto</h2>
+            <p data-reveal class="eyebrow">¿Listo para empezar?</p>
+            <h2 data-split>Aparta uno de los 3 lugares del piloto</h2>
           </div>
           <a
-            class="btn btn--accent btn--lg"
+            data-reveal class="btn btn--accent btn--lg"
             href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
             target="_blank"
             rel="noopener"

@@ -1,0 +1,73 @@
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: hidden; /* con scrollbar-gutter: stable no se corre el layout al pausar */
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Estados iniciales ocultos: solo con JS y con movimiento permitido.
+   Sin JavaScript (o si falla) todo queda visible. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-split] {
+    visibility: hidden;
+  }
+
+  .js [data-reveal],
+  .js [data-stagger] > * {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+/* Titulares por líneas: la máscara no debe recortar ascendentes ni descendentes */
+.split-line-mask {
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Línea de nodos que conecta las secciones */
+main {
+  position: relative;
+}
+
+.node-line {
+  position: absolute;
+  top: 0;
+  left: max(0.3rem, calc((100% - var(--content-max)) / 2 + var(--content-padding) - 2.1rem));
+  width: 14px;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.node-line path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--color-brand-light) 60%, transparent);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+.node-line circle {
+  fill: var(--color-ink-800);
+  stroke: color-mix(in srgb, var(--color-gray-500) 80%, transparent);
+  stroke-width: 1;
+  transition: fill 0.5s var(--ease-out), stroke 0.5s var(--ease-out), filter 0.5s var(--ease-out);
+}
+
+.node-line circle.is-lit {
+  fill: var(--color-node-amber);
+  stroke: var(--color-node-amber);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--color-node-amber) 80%, transparent));
+}

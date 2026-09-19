@@ -1,3 +1,3 @@
-export function init() {}
+import { definePage } from '../dom/page.js';
 
-export function destroy() {}
+export const { init, destroy } = definePage();

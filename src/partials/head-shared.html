@@ -9,5 +9,12 @@
 />
 <link rel="stylesheet" href="/src/styles/main.css" />
 <script>
-  document.documentElement.classList.add('js');
+  (function () {
+    var root = document.documentElement;
+    root.classList.add('js');
+    // Si el JavaScript falla, se quita .js para que el contenido quede visible.
+    setTimeout(function () {
+      if (!root.classList.contains('is-ready')) root.classList.remove('js');
+    }, 5000);
+  })();
 </script>

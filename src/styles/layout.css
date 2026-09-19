@@ -40,7 +40,7 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: linear-gradient(to bottom, var(--color-ink-950) 0%, color-mix(in srgb, var(--color-ink-950) 85%, transparent) 80%, transparent 100%);
+  background: linear-gradient(to bottom, var(--color-ink-950) 0%, var(--color-ink-950) 68%, transparent 100%);
   padding-block: var(--space-2xs);
 }
 
@@ -110,6 +110,7 @@
 }
 
 .site-nav a:not(.btn) {
+  white-space: nowrap;
   text-decoration: none;
   color: var(--color-text-muted);
   transition: color var(--duration-fast) var(--ease-out);
@@ -121,7 +122,7 @@
   color: var(--color-text);
 }
 
-@media (max-width: 63.9375rem) {
+@media (max-width: 74.9375rem) {
   .nav-toggle {
     display: grid;
     place-items: center;

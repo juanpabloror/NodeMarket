@@ -12,7 +12,7 @@
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
 }
 
 .btn--accent {
@@ -142,8 +142,8 @@
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-node-amber) 20%, transparent), 0 1.5rem 3rem -1.5rem color-mix(in srgb, var(--color-node-amber) 45%, transparent);
 }
 
-.pricing-stage[data-estado="proximamente"] {
-  opacity: 0.75;
+.pricing-stage[data-estado="proximamente"] > * {
+  opacity: 0.78;
 }
 
 .pricing-stage__node {

@@ -1,23 +1,17 @@
-let form;
+import { definePage } from '../dom/page.js';
 
-function handleSubmit(event) {
-  event.preventDefault();
-  const numero = form.dataset.whatsapp;
-  const nombre = form.nombre.value.trim();
-  const negocio = form.negocio.value.trim();
-  const mensaje = form.mensaje.value.trim();
+// El formulario arma el mensaje de WhatsApp con los datos capturados.
+export const { init, destroy } = definePage((container) => {
+  const form = container.querySelector('#contact-form');
+  if (!form) return;
 
-  const texto = `Hola, soy ${nombre} de ${negocio}. ${mensaje}`;
-  const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const texto = `Hola, soy ${form.nombre.value.trim()} de ${form.negocio.value.trim()}. ${form.mensaje.value.trim()}`;
+    window.open(`https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+  };
 
-  window.open(url, '_blank', 'noopener');
-}
-
-export function init() {
-  form = document.getElementById('contact-form');
-  form?.addEventListener('submit', handleSubmit);
-}
-
-export function destroy() {
-  form?.removeEventListener('submit', handleSubmit);
-}
+  form.addEventListener('submit', onSubmit);
+  return () => form.removeEventListener('submit', onSubmit);
+});
