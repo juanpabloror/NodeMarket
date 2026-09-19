@@ -10,7 +10,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Paquetes — Node Market" />
     <meta property="og:description" content="Etapas, cupos y precios de Node Market para negocios locales." />
-    <meta property="og:url" content="{{ site.marca.dominio }}/paquetes/" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="{{ site.marca.nombre }}" />
+    <!--@if site.marca.origin-->
+    <link rel="canonical" href="{{ site.marca.origin }}/paquetes/" />
+    <meta property="og:url" content="{{ site.marca.origin }}/paquetes/" />
+    <meta property="og:image" content="{{ site.marca.origin }}/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Node Market — Tu negocio, conectado" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!--@endif-->
   </head>
   <body data-page="paquetes">
     <!--@include header-->
@@ -36,7 +46,7 @@
           >
             <span class="pricing-stage__node"></span>
             <span class="badge badge--{{ stage.estado }}">{{ stage.condicion }}</span>
-            <h3>{{ stage.nombre }}</h3>
+            <h2 class="pricing-stage__name">{{ stage.nombre }}</h2>
             <p class="pricing-stage__precio">{{ stage.implementacion | mxn:stage.implementacionTexto }}</p>
             <p class="pricing-stage__mensualidad">{{ stage.mensualidad | mxn:stage.mensualidadTexto }}{{ stage.mensualidadSufijo }}</p>
             <p class="pricing-stage__cupo">{{ stage.cupoTexto }}</p>

@@ -12,8 +12,7 @@
       "mensualidadTexto": "$0 durante el piloto",
       "mensualidadSufijo": "",
       "cupoTotal": 3,
-      "cupoDisponible": 3,
-      "cupoTexto": "Quedan 3 de 3 lugares"
+      "cupoDisponible": 3
     },
     {
       "id": "fundadores",
@@ -26,8 +25,7 @@
       "mensualidadTexto": null,
       "mensualidadSufijo": " al mes",
       "cupoTotal": 5,
-      "cupoDisponible": 5,
-      "cupoTexto": "Quedan 5 de 5 lugares"
+      "cupoDisponible": 5
     },
     {
       "id": "oferta-formal",
@@ -40,8 +38,7 @@
       "mensualidadTexto": "Próximamente",
       "mensualidadSufijo": "",
       "cupoTotal": null,
-      "cupoDisponible": null,
-      "cupoTexto": null
+      "cupoDisponible": null
     },
     {
       "id": "premium",
@@ -54,8 +51,7 @@
       "mensualidadTexto": "Cotización",
       "mensualidadSufijo": "",
       "cupoTotal": null,
-      "cupoDisponible": null,
-      "cupoTexto": null
+      "cupoDisponible": null
     }
   ]
 }

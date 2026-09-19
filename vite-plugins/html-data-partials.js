@@ -1,11 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { loadData, professionalServiceJsonLd } from './site-data.js';
 
 const PARTIALS_DIR = resolve(process.cwd(), 'src/partials');
-const DATA_DIR = resolve(process.cwd(), 'src/data');
 
 const INCLUDE_RE = /<!--\s*@include\s+([\w-]+)\s*-->/g;
 const EACH_RE = /<!--\s*@each\s+([\w.]+)\s+as\s+(\w+)\s*-->([\s\S]*?)<!--\s*@endeach\s*-->/;
+const IF_RE = /<!--\s*@if\s+([\w.]+)\s*-->([\s\S]*?)<!--\s*@endif\s*-->/g;
+const JSONLD_RE = /<!--\s*@jsonld\s*-->/g;
 const VAR_RE = /\{\{\s*([^}]+?)\s*\}\}/g;
 
 const filters = {
@@ -73,6 +75,11 @@ function resolveEach(html, scope) {
   return output;
 }
 
+// <!--@if ruta.al.dato-->...<!--@endif--> deja el bloque solo si el dato existe y no está vacío.
+function resolveIf(html, scope) {
+  return html.replace(IF_RE, (_, path, body) => (getPath(scope, path) ? body : ''));
+}
+
 function resolveIncludes(html) {
   let output = html;
   let guard = 0;
@@ -99,12 +106,12 @@ export default function htmlDataPartials() {
       // en el HTML cuando Vite hace ese escaneo.
       order: 'pre',
       handler(html) {
-        const site = JSON.parse(readFileSync(resolve(DATA_DIR, 'site.json'), 'utf-8'));
-        const pricing = JSON.parse(readFileSync(resolve(DATA_DIR, 'pricing.json'), 'utf-8'));
-        const scope = { site, pricing };
+        const scope = loadData();
 
         let output = resolveIncludes(html);
+        output = output.replace(JSONLD_RE, () => professionalServiceJsonLd(scope.site));
         output = resolveEach(output, scope);
+        output = resolveIf(output, scope);
         output = resolveVars(output, scope);
         return output;
       },

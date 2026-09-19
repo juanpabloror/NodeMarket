@@ -215,7 +215,7 @@
   color: var(--color-text-muted);
 }
 
-.site-footer h3 {
+.site-footer__title {
   font-size: var(--step--1);
   font-family: var(--font-body);
   font-weight: 600;

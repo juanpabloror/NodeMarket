@@ -16,13 +16,13 @@
 }
 
 .btn--accent {
-  background: var(--color-brand);
+  background: var(--color-accent-solid);
   color: var(--color-paper);
 }
 
 .btn--accent:hover,
 .btn--accent:focus-visible {
-  background: var(--color-brand-light);
+  background: var(--color-accent-solid-hover);
 }
 
 .btn--ghost {
@@ -163,7 +163,7 @@
   margin-bottom: var(--space-md);
 }
 
-.pricing-stage h3 {
+.pricing-stage__name {
   font-size: var(--step-0);
   margin-bottom: var(--space-2xs);
 }

@@ -1,7 +1,7 @@
 <footer class="site-footer">
   <div class="container site-footer__grid">
     <div class="site-footer__brand">
-      <a href="/" class="site-logo" aria-label="Node Market — inicio">
+      <a href="/" class="site-logo">
         <!--@include logo-icon-->
         <span class="site-logo__word"><b>NODE</b><span>MARKET</span></span>
       </a>
@@ -9,7 +9,7 @@
     </div>
 
     <div>
-      <h3>Navegación</h3>
+      <h2 class="site-footer__title">Navegación</h2>
       <ul>
         <!--@each site.nav as item-->
         <li><a href="{{ item.href }}">{{ item.label }}</a></li>
@@ -18,7 +18,7 @@
     </div>
 
     <div>
-      <h3>Contacto</h3>
+      <h2 class="site-footer__title">Contacto</h2>
       <ul>
         <li><a href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}" target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="mailto:{{ site.contacto.email }}">{{ site.contacto.email }}</a></li>

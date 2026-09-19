@@ -47,6 +47,12 @@ p {
   text-wrap: pretty;
 }
 
+/* Velo sutil bajo el texto: mantiene el contraste AA cuando un nodo brillante pasa por detrás */
+main :is(h1, h2, h3, p, summary, label) {
+  text-shadow: 0 0 1.1rem color-mix(in srgb, var(--color-ink-950) 90%, transparent),
+    0 0 0.3rem color-mix(in srgb, var(--color-ink-950) 65%, transparent);
+}
+
 a {
   color: inherit;
 }

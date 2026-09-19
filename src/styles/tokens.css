@@ -3,6 +3,9 @@
   --color-brand: #5d72ff;
   --color-brand-light: #8b9bff;
   --color-brand-dark: #4356d6;
+  /* Relleno de botones: #5d72ff con texto blanco da 3.78:1; este tono cumple AA (4.67:1) */
+  --color-accent-solid: #465eff;
+  --color-accent-solid-hover: #3a53ff;
 
   /* — tinta (fondos oscuros) — */
   --color-ink-950: #05060b;
