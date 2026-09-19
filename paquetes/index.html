@@ -27,7 +27,13 @@
       <section class="section container">
         <div class="pricing-path">
           <!--@each pricing.stages as stage-->
-          <article class="pricing-stage" data-estado="{{ stage.estado }}">
+          <article
+            class="pricing-stage"
+            data-stage="{{ stage.id }}"
+            data-estado="{{ stage.estado }}"
+            data-cupo-total="{{ stage.cupoTotal }}"
+            data-cupo-disponible="{{ stage.cupoDisponible }}"
+          >
             <span class="pricing-stage__node"></span>
             <span class="badge badge--{{ stage.estado }}">{{ stage.condicion }}</span>
             <h3>{{ stage.nombre }}</h3>
