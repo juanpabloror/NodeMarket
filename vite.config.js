@@ -7,6 +7,8 @@ const page = (dir) => resolve(__dirname, dir, 'index.html');
 export default defineConfig({
   plugins: [htmlDataPartials()],
   build: {
+    // El chunk de la escena (three.js) se carga en diferido, tras el primer render.
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       input: {
         inicio: page('.'),
