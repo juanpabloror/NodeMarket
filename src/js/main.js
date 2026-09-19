@@ -146,9 +146,14 @@ if (sceneEl) {
     import('../background/scene.js')
       .then((scene) => scene.start(sceneEl))
       .catch((err) => console.error('No se pudo iniciar el fondo 3D.', err));
-  requestAnimationFrame(() =>
-    'requestIdleCallback' in window ? requestIdleCallback(loadScene, { timeout: 2000 }) : setTimeout(loadScene, 300)
-  );
+  // La escena 3D espera a que la página termine de cargar para no competir con el contenido del héroe.
+  const scheduleScene = () =>
+    setTimeout(() => {
+      if ('requestIdleCallback' in window) requestIdleCallback(loadScene, { timeout: 2500 });
+      else loadScene();
+    }, 400);
+  if (document.readyState === 'complete') scheduleScene();
+  else window.addEventListener('load', scheduleScene, { once: true });
 }
 
 if (import.meta.env.DEV) window.__nm = { swup, ScrollTrigger, state, getLenis: () => lenis };
