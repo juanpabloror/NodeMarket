@@ -1,7 +1,7 @@
 import { gsap, ScrollTrigger } from '../gsap.js';
 
 const NS = 'http://www.w3.org/2000/svg';
-const AMPLITUDE = [3, 11];
+const X = 7; // posición horizontal fija: la línea es recta, no un zigzag
 const ANCHORS = '.eyebrow, .hero__eyebrow, h1, h2, h3';
 
 const el = (name, attrs = {}) => {
@@ -36,9 +36,9 @@ export function setupNodeLine(container, { motion }) {
       const box = section.getBoundingClientRect();
       return box.top + window.scrollY - top + parseFloat(getComputedStyle(section).paddingTop);
     });
-    path.setAttribute('d', ys.map((y, i) => `${i ? 'L' : 'M'}${AMPLITUDE[i % 2]} ${y}`).join(' '));
+    path.setAttribute('d', ys.map((y, i) => `${i ? 'L' : 'M'}${X} ${y}`).join(' '));
     dots.forEach((dot, i) => {
-      dot.setAttribute('cx', AMPLITUDE[i % 2]);
+      dot.setAttribute('cx', X);
       dot.setAttribute('cy', ys[i]);
     });
     length = path.getTotalLength();

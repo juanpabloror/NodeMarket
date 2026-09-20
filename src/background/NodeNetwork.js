@@ -24,7 +24,7 @@ const DEFAULTS = {
   linkOpacity: 0.5,
   explicitOpacity: 0.38, // opacidad de las conexiones propias de cada formación
   linkFade: 5, // rapidez con que aparecen/desaparecen las conexiones
-  nodeSize: 17, // px CSS
+  nodeSize: 26, // px CSS
   pulseAmount: 1, // 0 apaga el latido de los nodos
   rotationSpeed: 0.1, // rad/s de la fase de giro
   swayScale: 1, // multiplica el vaivén de cada formación; Infinity = giro continuo de 360°
