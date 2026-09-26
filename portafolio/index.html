@@ -35,6 +35,62 @@
       </section>
 
       <section class="section container">
+        <div class="grid_portafolio">
+          <div class="section__head">
+            <p data-reveal class="eyebrow">Un adelanto</p>
+            <h2 data-split>Así se ve lo que construimos</h2>
+            <p data-reveal class="hero__lead">
+              Mientras se suman los primeros casos, aquí tienes un ejemplo real: este mismo sitio, en tres tamaños de
+              pantalla. Arrastra la tarjeta para girarla.
+            </p>
+          </div>
+  
+          <!--@each portafolio.proyectos as proyecto-->
+          <figure class="portfolio-showcase" data-reveal>
+            <div class="portfolio-showcase__stage">
+              <img
+                class="portfolio-showcase__shot"
+                data-device="desktop"
+                src="{{ proyecto.capturas.desktop }}"
+                alt="{{ proyecto.nombre }}, vista de escritorio"
+                width="1440"
+                height="900"
+              />
+              <img
+                class="portfolio-showcase__shot"
+                data-device="tablet"
+                src="{{ proyecto.capturas.tablet }}"
+                alt="{{ proyecto.nombre }}, vista de tablet"
+                width="820"
+                height="1180"
+                hidden
+              />
+              <img
+                class="portfolio-showcase__shot"
+                data-device="mobile"
+                src="{{ proyecto.capturas.mobile }}"
+                alt="{{ proyecto.nombre }}, vista de móvil"
+                width="390"
+                height="844"
+                hidden
+              />
+            </div>
+            <figcaption class="portfolio-showcase__caption">
+              <span>{{ proyecto.nombre }}</span>
+              <div class="portfolio-showcase__controls" role="group" aria-label="Tamaño de pantalla">
+                <button type="button" data-device="desktop" aria-pressed="true">Escritorio</button>
+                <button type="button" data-device="tablet" aria-pressed="false">Tablet</button>
+                <button type="button" data-device="mobile" aria-pressed="false">Móvil</button>
+              </div>
+            </figcaption>
+          </figure>
+
+
+        </div>
+        <!--@endeach-->
+      </section>
+
+      <section class="section container">
         <div class="piloto-callout">
           <p data-reveal class="eyebrow">Piloto Basic</p>
           <h2 data-split>Sé uno de los 3 negocios piloto</h2>

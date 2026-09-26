@@ -1,0 +1,13 @@
+{
+  "proyectos": [
+    {
+      "id": "node-market",
+      "nombre": "Node Market",
+      "capturas": {
+        "desktop": "/src/assets/portfolio/nodemarket-desktop.jpg",
+        "tablet": "/src/assets/portfolio/nodemarket-tablet.jpg",
+        "mobile": "/src/assets/portfolio/nodemarket-mobile.jpg"
+      }
+    }
+  ]
+}

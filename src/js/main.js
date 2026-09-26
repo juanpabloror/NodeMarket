@@ -141,7 +141,9 @@ document.fonts?.ready.then(() => ScrollTrigger.refresh());
 root.classList.add('is-ready');
 
 const sceneEl = document.getElementById('node-scene');
-if (sceneEl) {
+// Dentro de un iframe (la vitrina 3D de /portafolio/ incrusta el sitio) no arrancamos el fondo:
+// no compite por GPU con la escena que ya lo está mostrando "por fuera".
+if (sceneEl && window.self === window.top) {
   const loadScene = () =>
     import('../background/scene.js')
       .then((scene) => scene.start(sceneEl))

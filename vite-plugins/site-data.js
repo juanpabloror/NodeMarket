@@ -43,9 +43,10 @@ function prepareStages(pricing) {
 export function loadData() {
   const site = JSON.parse(readFileSync(resolve(DATA_DIR, 'site.json'), 'utf-8'));
   const pricing = JSON.parse(readFileSync(resolve(DATA_DIR, 'pricing.json'), 'utf-8'));
+  const portafolio = JSON.parse(readFileSync(resolve(DATA_DIR, 'portafolio.json'), 'utf-8'));
   site.marca.origin = normalizeOrigin(site.marca.dominio);
   prepareStages(pricing);
-  return { site, pricing };
+  return { site, pricing, portafolio };
 }
 
 // JSON-LD ProfessionalService: solo incluye campos con datos reales (nunca los TODO).
