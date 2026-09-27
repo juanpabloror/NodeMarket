@@ -8,6 +8,11 @@
   (function () {
     var root = document.documentElement;
     root.classList.add('js');
+    // Se decide el tema antes del primer pintado, para no parpadear entre claro y oscuro.
+    try {
+      var stored = localStorage.getItem('nm-theme');
+      root.dataset.theme = stored || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    } catch (e) {}
     // Si el JavaScript falla, se quita .js para que el contenido quede visible.
     setTimeout(function () {
       if (!root.classList.contains('is-ready')) root.classList.remove('js');

@@ -122,6 +122,33 @@ swup.hooks.on('page:view', () => {
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+/* — tema claro/oscuro — */
+/* Cambia el color de las tarjetas/formulario/footer (ver components.css) y el de la escena 3D
+   (fondo, nodos y conexiones — ver scene.js). El tema ya se aplicó antes del primer pintado en
+   head-shared.html; setState() avisa a la escena, que puede estar cargada o no todavía. */
+const THEME_KEY = 'nm-theme';
+const themeToggle = document.getElementById('theme-toggle');
+const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
+
+function applyTheme(theme) {
+  root.dataset.theme = theme;
+  themeToggle?.setAttribute('aria-label', theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+  setState({ theme });
+}
+
+applyTheme(root.dataset.theme || (prefersLight.matches ? 'light' : 'dark'));
+
+themeToggle?.addEventListener('click', () => {
+  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+  localStorage.setItem(THEME_KEY, next);
+  applyTheme(next);
+});
+
+prefersLight.addEventListener('change', (event) => {
+  if (localStorage.getItem(THEME_KEY)) return;
+  applyTheme(event.matches ? 'light' : 'dark');
+});
+
 let lastBurst = 0;
 const launchBurst = (event) => {
   const cta = event.target.closest?.('.btn--accent.btn--lg');

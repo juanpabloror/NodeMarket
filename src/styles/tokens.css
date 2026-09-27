@@ -36,6 +36,22 @@
   --color-focus: var(--color-brand-light);
   --color-veil: color-mix(in srgb, var(--color-ink-950) 55%, transparent);
 
+  /* — modo claro: tarjetas/formulario/footer (ver components.css) y la escena 3D (ver scene.js).
+     El resto del texto suelto (héroe, títulos de sección, header) sigue con el estilo oscuro de
+     siempre porque flota directo sobre el canvas — */
+  --color-light-surface: #ffffff;
+  --color-light-border: color-mix(in srgb, #14151c 14%, transparent);
+  --color-light-text: #14151c;
+  --color-light-text-muted: color-mix(in srgb, #14151c 62%, transparent);
+  --color-light-accent: var(--color-brand-dark);
+
+  /* — escena 3D en modo claro: fondo blanco, nodos y conexiones con los colores del logo — */
+  --color-scene-light-bg: var(--color-light-surface);
+  --color-scene-light-node: var(--color-brand);
+  --color-scene-light-link: var(--color-gray-500);
+  --color-scene-light-pulse: var(--color-brand-dark);
+  --color-scene-light-highlight: var(--color-brand-light);
+
   /* — tipografía — */
   --font-display: "Playfair Display", "Iowan Old Style", Georgia, serif;
   --font-heading: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
@@ -74,4 +90,15 @@
   --radius-full: 999px;
 
   color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  /* El fondo 3D ahora también se pone blanco en este modo (ver scene.js), así que el texto y los
+     bordes que flotan sobre él (héroe, eyebrows, párrafos sueltos) deben oscurecerse con él.
+     El header/nav es la única excepción: se fija a sus valores oscuros en layout.css, porque su
+     franja superior nunca deja de ser oscura. */
+  --color-text: var(--color-light-text);
+  --color-text-muted: var(--color-light-text-muted);
+  --color-border: var(--color-light-border);
 }

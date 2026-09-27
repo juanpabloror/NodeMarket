@@ -7,6 +7,7 @@ import {
   Group,
   LineSegments,
   MathUtils,
+  NormalBlending,
   Points,
   ShaderMaterial,
   Vector2,
@@ -119,6 +120,8 @@ const LINES_FRAG = /* glsl */ `
     #include <colorspace_fragment>
   }
 `;
+
+export const DEFAULT_COLORS = DEFAULTS.colors;
 
 const rgbUniform = (css) => {
   const c = new Color(css);
@@ -378,6 +381,23 @@ export class NodeNetwork {
     this.uniforms.uCamDist.value = camDist;
     this.uniforms.uDepth.value.set(camDist - radius, camDist + radius);
     this.camera.updateMatrixWorld();
+  }
+
+  // Cambia los colores en vivo (nodos, conexiones y el pulso/resplandor del cursor) sin recrear nada.
+  // additive=false usa mezcla normal en vez de aditiva: sobre un fondo blanco, "sumar" luz solo
+  // da blanco, así que los nodos se volverían invisibles si se quedaran en modo aditivo.
+  setColors({ node, link, pulse, highlight, additive = true } = {}) {
+    if (node) this.nodeMaterial.uniforms.uColor.value.copy(rgbUniform(node));
+    if (highlight) this.nodeMaterial.uniforms.uHighlightColor.value.copy(rgbUniform(highlight));
+    if (link) this.linkMaterial.uniforms.uColor.value.copy(rgbUniform(link));
+    if (pulse) {
+      this.pulseMaterial.uniforms.uColor.value.copy(rgbUniform(pulse));
+      this.pulseMaterial.uniforms.uHighlightColor.value.copy(rgbUniform(pulse));
+    }
+    const blending = additive ? AdditiveBlending : NormalBlending;
+    this.nodeMaterial.blending = blending;
+    this.linkMaterial.blending = blending;
+    this.pulseMaterial.blending = blending;
   }
 
   setReducedMotion(reduced) {

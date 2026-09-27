@@ -5,6 +5,7 @@ export const state = {
   scroll: 0,
   activeGroup: -1,
   stages: [],
+  theme: document.documentElement.dataset.theme || 'dark',
 };
 
 export function on(event, handler) {

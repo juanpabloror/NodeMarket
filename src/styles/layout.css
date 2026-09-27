@@ -96,6 +96,46 @@
   display: none;
 }
 
+/* El botón de tema vive dentro del header/nav, que siempre se funde con el canvas oscuro,
+   así que su estilo no cambia entre modos (igual que los links del nav). */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--color-text);
+  border-color: var(--color-brand-light);
+}
+
+.theme-toggle__icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.theme-toggle__icon--moon {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle__icon--sun {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle__icon--moon {
+  display: block;
+}
+
 .site-nav {
   display: flex;
   align-items: center;
@@ -191,6 +231,39 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+  }
+}
+
+/* El header/nav siempre se funde con el degradado oscuro fijo del header (no cambia con el tema:
+   ver .site-header más abajo), así que su texto y bordes tampoco cambian aquí — se fijan a sus
+   valores oscuros de siempre en vez de heredar --color-text-muted/--color-border ya tematizados. */
+:root[data-theme="light"] .theme-toggle {
+  color: color-mix(in srgb, var(--color-paper) 68%, transparent);
+  border-color: color-mix(in srgb, var(--color-paper) 14%, transparent);
+}
+
+:root[data-theme="light"] .theme-toggle:hover,
+:root[data-theme="light"] .theme-toggle:focus-visible {
+  color: var(--color-paper);
+}
+
+:root[data-theme="light"] .site-nav a:not(.btn) {
+  color: color-mix(in srgb, var(--color-paper) 68%, transparent);
+}
+
+:root[data-theme="light"] .site-nav a:not(.btn):hover,
+:root[data-theme="light"] .site-nav a:not(.btn):focus-visible,
+:root[data-theme="light"] .site-nav a[aria-current="page"] {
+  color: var(--color-paper);
+}
+
+@media (max-width: 74.9375rem) {
+  :root[data-theme="light"] .nav-toggle {
+    border-color: color-mix(in srgb, var(--color-paper) 14%, transparent);
+  }
+
+  :root[data-theme="light"] .site-nav {
+    border-color: color-mix(in srgb, var(--color-paper) 14%, transparent);
   }
 }
 
@@ -337,6 +410,12 @@ main {
 .hero h1 em {
   font-style: normal;
   color: var(--color-brand-light);
+}
+
+/* El eyebrow y el énfasis del héroe flotan sobre el canvas: en modo claro (canvas blanco) el
+   índigo claro casi no se ve, así que aquí usan la variante oscura del mismo acento. */
+:root[data-theme="light"] :is(.eyebrow, .hero__eyebrow, .hero h1 em) {
+  color: var(--color-light-accent);
 }
 
 .hero__lead {

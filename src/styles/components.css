@@ -387,3 +387,105 @@
   max-width: 40rem;
   margin-inline: auto;
 }
+
+/* — modo claro —
+   Solo las tarjetas, el formulario y el footer cambian: son las únicas superficies con fondo
+   propio. El resto del contenido flota directo sobre el canvas 3D (que se queda oscuro siempre),
+   así que se queda con su estilo actual en ambos modos. */
+
+:root[data-theme="light"] :is(.service-card, .pricing-stage, .faq-item, .site-footer) {
+  color: var(--color-light-text);
+}
+
+:root[data-theme="light"] .service-card {
+  background: var(--color-light-surface);
+  border-color: var(--color-light-border);
+}
+
+:root[data-theme="light"] .service-card p {
+  color: var(--color-light-text-muted);
+}
+
+:root[data-theme="light"] .service-card__index {
+  color: var(--color-light-accent);
+}
+
+:root[data-theme="light"] .service-card:hover,
+:root[data-theme="light"] .service-card:focus-within {
+  border-color: var(--color-light-accent);
+}
+
+:root[data-theme="light"] .pricing-stage {
+  background: var(--color-light-surface);
+  border-color: var(--color-light-border);
+}
+
+:root[data-theme="light"] .pricing-stage__condicion,
+:root[data-theme="light"] .pricing-stage__mensualidad {
+  color: var(--color-light-text-muted);
+}
+
+:root[data-theme="light"] .pricing-stage__cupo {
+  color: var(--color-light-accent);
+}
+
+:root[data-theme="light"] .badge,
+:root[data-theme="light"] .badge--proximamente,
+:root[data-theme="light"] .badge--cerrada {
+  color: var(--color-light-text-muted);
+}
+
+:root[data-theme="light"] .faq-item {
+  background: var(--color-light-surface);
+  border-color: var(--color-light-border);
+}
+
+:root[data-theme="light"] .faq-item p {
+  color: var(--color-light-text-muted);
+}
+
+:root[data-theme="light"] .faq-item summary::after {
+  color: var(--color-light-accent);
+}
+
+:root[data-theme="light"] .form-field input,
+:root[data-theme="light"] .form-field textarea {
+  background: var(--color-light-surface);
+  border-color: var(--color-light-border);
+  color: var(--color-light-text);
+}
+
+:root[data-theme="light"] .form-field input:focus-visible,
+:root[data-theme="light"] .form-field textarea:focus-visible {
+  border-color: var(--color-light-accent);
+}
+
+:root[data-theme="light"] .site-footer {
+  background: var(--color-light-surface);
+  border-color: var(--color-light-border);
+}
+
+:root[data-theme="light"] .site-footer__bottom {
+  border-color: var(--color-light-border);
+}
+
+:root[data-theme="light"] :is(.site-footer__brand p, .site-footer__title, .site-footer a, .site-footer__bottom) {
+  color: var(--color-light-text-muted);
+}
+
+:root[data-theme="light"] .site-footer a:hover,
+:root[data-theme="light"] .site-footer a:focus-visible {
+  color: var(--color-light-text);
+}
+
+:root[data-theme="light"] .portfolio-showcase__stage {
+  background: var(--color-light-surface);
+  border-color: var(--color-light-border);
+}
+
+/* El "velo" de texto está pensado para texto claro sobre el canvas oscuro; dentro de estas
+   superficies ya opacas y claras, ese halo se ve como una mancha y se quita. */
+:root[data-theme="light"] :is(.service-card, .pricing-stage, .faq-item, .site-footer, .form-field)
+  :is(h1, h2, h3, p, summary, label) {
+  text-shadow: none;
+}

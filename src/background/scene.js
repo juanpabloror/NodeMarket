@@ -1,11 +1,24 @@
 import { Color, PerspectiveCamera, Scene, Vector2, WebGLRenderer } from 'three';
 import { gsap } from 'gsap';
-import { NodeNetwork } from './NodeNetwork.js';
+import { DEFAULT_COLORS, NodeNetwork } from './NodeNetwork.js';
 import { TIERS, createFpsMonitor, forcedTier, initialTier, nextLowerTier } from './quality.js';
 import { on, state } from '../state.js';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const BLOOM_SCALE = 0.5;
+
+// El fondo y los colores de la escena solo tienen una variante clara; el resto del sitio también
+// tiene una oscura porque flota sobre este mismo canvas (ver tokens.css).
+const readVar = (name, fallback) => getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+const readTheme = () => ({
+  bg: readVar('--color-scene-light-bg', '#ffffff'),
+  colors: {
+    node: readVar('--color-scene-light-node', DEFAULT_COLORS.node),
+    link: readVar('--color-scene-light-link', DEFAULT_COLORS.link),
+    pulse: readVar('--color-scene-light-pulse', DEFAULT_COLORS.pulse),
+    highlight: readVar('--color-scene-light-highlight', DEFAULT_COLORS.highlight),
+  },
+});
 
 export function start(container) {
   let renderer;
@@ -15,12 +28,13 @@ export function start(container) {
     return null;
   }
 
-  const bg = getComputedStyle(document.documentElement).getPropertyValue('--color-bg').trim();
+  const darkBg = new Color(readVar('--color-bg', '#05060b'));
+  const light = readTheme();
+  const lightBg = new Color(light.bg);
   renderer.domElement.classList.add('node-scene__canvas');
   container.appendChild(renderer.domElement);
 
   const scene = new Scene();
-  scene.background = new Color(bg || '#05060b');
   const camera = new PerspectiveCamera(50, 1, 0.1, 100);
   camera.position.set(0, 0, 24);
 
@@ -33,6 +47,14 @@ export function start(container) {
   });
   const applyFormation = () => network.setFormation(state.formation, { stages: state.stages });
   applyFormation();
+
+  const applyTheme = (theme) => {
+    const isLight = theme === 'light';
+    scene.background = isLight ? lightBg : darkBg;
+    network.setColors({ ...(isLight ? light.colors : DEFAULT_COLORS), additive: !isLight });
+    setBloom(tier.bloom && !isLight);
+    if (!running) draw();
+  };
 
   let bloom = null;
   let bloomWanted = false;
@@ -124,7 +146,7 @@ export function start(container) {
     tier = TIERS[name];
     container.dataset.quality = name;
     network.setNodeCount(tier.count);
-    setBloom(tier.bloom);
+    setBloom(tier.bloom && state.theme !== 'light');
     resize();
   }
 
@@ -144,6 +166,7 @@ export function start(container) {
   const offFormation = on('formation', applyFormation);
   const offStages = on('stages', () => state.formation === 'ruta' && applyFormation());
   const offBurst = on('burst', () => network.burst());
+  const offTheme = on('theme', applyTheme);
 
   const observer = new ResizeObserver(resize);
   observer.observe(container);
@@ -151,7 +174,7 @@ export function start(container) {
   reducedMotion.addEventListener('change', onMotionChange);
 
   container.dataset.quality = tierName;
-  setBloom(tier.bloom);
+  applyTheme(state.theme);
   resize();
   network.update(0);
   draw();
@@ -165,6 +188,7 @@ export function start(container) {
       offFormation();
       offStages();
       offBurst();
+      offTheme();
       observer.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       reducedMotion.removeEventListener('change', onMotionChange);

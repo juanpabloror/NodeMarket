@@ -71,3 +71,8 @@ main {
   stroke: var(--color-node-amber);
   filter: drop-shadow(0 0 5px color-mix(in srgb, var(--color-node-amber) 80%, transparent));
 }
+
+/* Flota sobre el canvas: en modo claro (canvas blanco) el índigo claro casi no se ve. */
+:root[data-theme="light"] .node-line path {
+  stroke: color-mix(in srgb, var(--color-light-accent) 55%, transparent);
+}
