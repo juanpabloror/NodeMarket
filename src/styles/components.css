@@ -142,7 +142,7 @@
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-node-amber) 20%, transparent), 0 1.5rem 3rem -1.5rem color-mix(in srgb, var(--color-node-amber) 45%, transparent);
 }
 
-.pricing-stage[data-estado="proximamente"] > * {
+.pricing-stage[data-estado="proximamente"]>* {
   opacity: 0.78;
 }
 
@@ -285,6 +285,14 @@
 .grid_portafolio {
   display: grid;
   grid-auto-flow: column;
+}
+
+
+
+@media (max-width: 980px) {
+  .grid_portafolio {
+    display: block;
+  }
 }
 
 .portfolio-showcase__stage {

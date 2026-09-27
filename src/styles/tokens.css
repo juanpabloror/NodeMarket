@@ -59,7 +59,7 @@
   --space-2xl: clamp(5rem, 3.9rem + 5.5vw, 8.5rem);
 
   /* — layout — */
-  --content-max: 74rem;
+  --content-max: 80rem;
   --content-padding: clamp(1.25rem, 4vw, 3rem);
 
   /* — movimiento — */
