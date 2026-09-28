@@ -1,6 +1,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#05060b" />
+<meta name="theme-color" content="#ffffff" />
 <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="stylesheet" href="/src/styles/main.css" />
@@ -9,9 +9,9 @@
     var root = document.documentElement;
     root.classList.add('js');
     // Se decide el tema antes del primer pintado, para no parpadear entre claro y oscuro.
+    // Claro es el modo por defecto, sin importar la preferencia del sistema.
     try {
-      var stored = localStorage.getItem('nm-theme');
-      root.dataset.theme = stored || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      root.dataset.theme = localStorage.getItem('nm-theme') || 'light';
     } catch (e) {}
     // Si el JavaScript falla, se quita .js para que el contenido quede visible.
     setTimeout(function () {

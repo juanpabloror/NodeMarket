@@ -28,7 +28,7 @@ export function start(container) {
     return null;
   }
 
-  const darkBg = new Color(readVar('--color-bg', '#05060b'));
+  const darkBg = new Color(readVar('--color-scene-dark-bg', '#05060b'));
   const light = readTheme();
   const lightBg = new Color(light.bg);
   renderer.domElement.classList.add('node-scene__canvas');

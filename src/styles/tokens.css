@@ -45,6 +45,10 @@
   --color-light-text-muted: color-mix(in srgb, #14151c 62%, transparent);
   --color-light-accent: var(--color-brand-dark);
 
+  /* — escena 3D: el fondo oscuro es un valor fijo (no --color-bg, que ya cambia con el tema) para
+     que scene.js siempre pueda volver a él sin importar qué tema estaba activo cuando arrancó — */
+  --color-scene-dark-bg: var(--color-ink-950);
+
   /* — escena 3D en modo claro: fondo blanco, nodos y conexiones con los colores del logo — */
   --color-scene-light-bg: var(--color-light-surface);
   --color-scene-light-node: var(--color-brand);
@@ -101,4 +105,8 @@
   --color-text: var(--color-light-text);
   --color-text-muted: var(--color-light-text-muted);
   --color-border: var(--color-light-border);
+  /* El fondo de <body> vive detrás de la imagen de respaldo del canvas 3D (que es transparente)
+     mientras la escena todavía no carga; si no cambia con el tema, se ve oscuro un instante antes
+     de que la escena aplique su propio fondo — el "flash" de oscuro al entrar en modo claro. */
+  --color-bg: var(--color-light-surface);
 }

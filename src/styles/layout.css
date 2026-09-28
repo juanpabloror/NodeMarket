@@ -44,6 +44,13 @@
   padding-block: var(--space-2xs);
 }
 
+/* En oscuro el header se funde con el canvas mediante el degradado de arriba; en claro no hay
+   nada oscuro con qué fundirse, así que es una barra blanca sólida con un borde sutil. */
+:root[data-theme="light"] .site-header {
+  background: var(--color-light-surface);
+  border-bottom: 1px solid var(--color-light-border);
+}
+
 .site-header__inner {
   display: flex;
   align-items: center;
@@ -234,36 +241,27 @@
   }
 }
 
-/* El header/nav siempre se funde con el degradado oscuro fijo del header (no cambia con el tema:
-   ver .site-header más abajo), así que su texto y bordes tampoco cambian aquí — se fijan a sus
-   valores oscuros de siempre en vez de heredar --color-text-muted/--color-border ya tematizados. */
-:root[data-theme="light"] .theme-toggle {
-  color: color-mix(in srgb, var(--color-paper) 68%, transparent);
-  border-color: color-mix(in srgb, var(--color-paper) 14%, transparent);
+/* El header ahora también se pone blanco en modo claro (ver .site-header más abajo), así que su
+   texto/bordes (theme-toggle, links del nav, hamburguesa) ya no se fijan a un valor oscuro fijo:
+   heredan --color-text-muted/--color-text/--color-border, que ya cambian con el tema. */
+
+/* El wordmark y el ícono del logo usan grises pensados para fondo oscuro; sobre blanco quedarían
+   casi invisibles, así que se oscurecen en modo claro. */
+:root[data-theme="light"] .site-logo__mark {
+  color: var(--color-gray-700);
 }
 
-:root[data-theme="light"] .theme-toggle:hover,
-:root[data-theme="light"] .theme-toggle:focus-visible {
-  color: var(--color-paper);
+:root[data-theme="light"] .site-logo__mark .nm-links {
+  stroke: var(--color-gray-700);
 }
 
-:root[data-theme="light"] .site-nav a:not(.btn) {
-  color: color-mix(in srgb, var(--color-paper) 68%, transparent);
-}
-
-:root[data-theme="light"] .site-nav a:not(.btn):hover,
-:root[data-theme="light"] .site-nav a:not(.btn):focus-visible,
-:root[data-theme="light"] .site-nav a[aria-current="page"] {
-  color: var(--color-paper);
+:root[data-theme="light"] .site-logo__word span {
+  color: var(--color-gray-700);
 }
 
 @media (max-width: 74.9375rem) {
-  :root[data-theme="light"] .nav-toggle {
-    border-color: color-mix(in srgb, var(--color-paper) 14%, transparent);
-  }
-
   :root[data-theme="light"] .site-nav {
-    border-color: color-mix(in srgb, var(--color-paper) 14%, transparent);
+    background: var(--color-light-surface);
   }
 }
 
@@ -354,6 +352,20 @@ main {
   inset: 0;
   background: var(--color-veil);
   z-index: -1;
+}
+
+/* Las secciones con velo (CTA de Inicio, Servicios y Paquetes) pasan a un panel blanco opaco en
+   modo claro: el velo translúcido oscuro ya no tiene sentido sobre un canvas que ahora es blanco. */
+:root[data-theme="light"] body[data-page="inicio"] .section--veil::before,
+:root[data-theme="light"] body[data-page="servicios"] .section--veil::before,
+:root[data-theme="light"] body[data-page="paquetes"] .section--veil::before {
+  background: var(--color-light-surface);
+}
+
+:root[data-theme="light"] body[data-page="inicio"] .section--veil :is(h1, h2, h3, p, summary, label),
+:root[data-theme="light"] body[data-page="servicios"] .section--veil :is(h1, h2, h3, p, summary, label),
+:root[data-theme="light"] body[data-page="paquetes"] .section--veil :is(h1, h2, h3, p, summary, label) {
+  text-shadow: none;
 }
 
 .section__head {
