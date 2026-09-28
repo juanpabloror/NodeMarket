@@ -3,17 +3,17 @@
     "nombre": "Node Market",
     "tagline": "Tu negocio, conectado.",
     "descripcionCorta": "Desarrollamos apps, sitios web, redes sociales y contenido a la medida para negocios locales.",
-    "dominio": "TODO: dominio del sitio (ej. nodemarket.mx)"
+    "dominio": "nodemarket.com.mx"
   },
   "contacto": {
     "whatsappNumero": "TODO: número de WhatsApp con lada, sin espacios ni signos (ej. 5215512345678)",
     "whatsappMensaje": "Hola, quiero conectar mi negocio con Node Market",
-    "email": "TODO: correo de contacto",
+    "email": "node_market@gmail.com",
     "ciudad": "Zacatecas, México",
-    "horario": "TODO: horario de atención",
+    "horario": "Atención 24 hrs",
     "redes": {
       "instagram": "TODO: URL de Instagram",
-      "facebook": "TODO: URL de Facebook",
+      "facebook": "https://www.facebook.com/people/Node-Market/61577985256897/",
       "tiktok": "TODO: URL de TikTok"
     }
   },
