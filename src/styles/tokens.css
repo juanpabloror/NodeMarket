@@ -3,56 +3,58 @@
   --color-brand: #5d72ff;
   --color-brand-light: #8b9bff;
   --color-brand-dark: #4356d6;
-  /* Relleno de botones: #5d72ff con texto blanco da 3.78:1; este tono cumple AA (4.67:1) */
+  /* Relleno de botones azules: #5d72ff con texto blanco da 3.78:1; este tono cumple AA (4.67:1) */
   --color-accent-solid: #465eff;
   --color-accent-solid-hover: #3a53ff;
 
-  /* — tinta (fondos oscuros) — */
-  --color-ink-950: #05060b;
-  --color-ink-900: #0a0c16;
-  --color-ink-800: #13172a;
-  --color-ink-700: #1f2440;
+  /* — paleta de "la casa": crema, salvia y tinta verde — */
+  --color-cream: #f4f3ec;
+  --color-cream-deep: #eae8dc;
+  --color-sage: #6d8450;
+  --color-sage-soft: #cfe0b4;
+  --color-sage-deep: #566b3d;
+  --color-forest: #243026;
+  --color-forest-hover: #31402f;
 
-  /* — escena de nodos — */
-  --color-node-amber: #f5a35a;
-  --color-node-amber-dim: #a86a3a;
-  --color-pulse: #f3f6ff;
+  /* — tinta (tema oscuro) — */
+  --color-ink-950: #07090f;
+  --color-ink-900: #0d1018;
+  --color-ink-800: #161b2a;
+  --color-ink-700: #212843;
 
-  /* — neutros — */
-  --color-paper: #fafafa;
-  --color-ink-text: #0b0b0d;
+  --color-node-amber: #b8741f;
   --color-gray-300: #b9bec9;
   --color-gray-500: #7a8093;
   --color-gray-700: #444a5a;
+  --color-paper: #fafafa;
 
-  /* — semánticos — */
-  --color-bg: var(--color-ink-950);
-  --color-surface: var(--color-ink-900);
-  --color-surface-raised: var(--color-ink-800);
-  --color-text: var(--color-paper);
-  --color-text-muted: color-mix(in srgb, var(--color-paper) 68%, transparent);
-  --color-border: color-mix(in srgb, var(--color-paper) 14%, transparent);
-  --color-accent: var(--color-brand);
-  --color-focus: var(--color-brand-light);
-  --color-veil: color-mix(in srgb, var(--color-ink-950) 55%, transparent);
+  /* — semánticos (modo claro por defecto) — */
+  --color-bg: var(--color-cream);
+  --color-surface: #fbfaf5;
+  --color-surface-raised: #ffffff;
+  --color-text: #1d2820;
+  --color-text-muted: #5a665d;
+  --color-text-faint: #7b867d;
+  --color-border: color-mix(in srgb, #1d2820 14%, transparent);
+  --color-border-strong: color-mix(in srgb, #1d2820 32%, transparent);
+  --color-accent: var(--color-brand-dark);
+  --color-emphasis: var(--color-sage);
+  --color-focus: var(--color-brand-dark);
+  --color-btn-bg: var(--color-forest);
+  --color-btn-bg-hover: var(--color-forest-hover);
+  --color-btn-text: #f7f6ee;
+  --color-pill-bg: color-mix(in srgb, #ffffff 82%, transparent);
+  --color-hotspot-dot: var(--color-sage-soft);
+  --color-node-line: color-mix(in srgb, var(--color-brand-dark) 55%, transparent);
+  --color-node-dot: var(--color-cream);
+  --color-shadow: color-mix(in srgb, #1d2820 18%, transparent);
+  --color-veil: color-mix(in srgb, var(--color-cream-deep) 70%, transparent);
 
-  /* — modo claro: tarjetas/formulario/footer (ver components.css) y la escena 3D (ver scene.js).
-     El resto del texto suelto (héroe, títulos de sección, header) sigue con el estilo oscuro de
-     siempre porque flota directo sobre el canvas — */
-  --color-light-surface: #ffffff;
-  --color-light-border: color-mix(in srgb, #14151c 14%, transparent);
-  --color-light-text: #14151c;
-  --color-light-text-muted: color-mix(in srgb, #14151c 62%, transparent);
-  --color-light-accent: var(--color-brand-dark);
-
-  /* — escena 3D: el fondo oscuro es un valor fijo (no --color-bg, que ya cambia con el tema) para
-     que scene.js siempre pueda volver a él sin importar qué tema estaba activo cuando arrancó — */
+  /* — escena 3D: fondo y colores de la red de nodos en modo claro (los lee scene.js) — */
   --color-scene-dark-bg: var(--color-ink-950);
-
-  /* — escena 3D en modo claro: fondo blanco, nodos y conexiones con los colores del logo — */
-  --color-scene-light-bg: var(--color-light-surface);
+  --color-scene-light-bg: var(--color-cream);
   --color-scene-light-node: var(--color-brand);
-  --color-scene-light-link: var(--color-gray-500);
+  --color-scene-light-link: #8d97b8;
   --color-scene-light-pulse: var(--color-brand-dark);
   --color-scene-light-highlight: var(--color-brand-light);
 
@@ -61,13 +63,14 @@
   --font-heading: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
   --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
 
+  --step--2: clamp(0.68rem, 0.66rem + 0.1vw, 0.75rem);
   --step--1: clamp(0.8rem, 0.77rem + 0.15vw, 0.9rem);
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
   --step-1: clamp(1.25rem, 1.18rem + 0.35vw, 1.5rem);
   --step-2: clamp(1.6rem, 1.45rem + 0.75vw, 2.1rem);
   --step-3: clamp(2.1rem, 1.8rem + 1.5vw, 3rem);
   --step-4: clamp(2.75rem, 2.2rem + 2.75vw, 4.5rem);
-  --step-5: clamp(3.4rem, 2.5rem + 4.5vw, 6.25rem);
+  --step-5: clamp(3.2rem, 2.2rem + 5vw, 6.25rem);
 
   /* — espaciado fluido — */
   --space-2xs: clamp(0.5rem, 0.47rem + 0.15vw, 0.625rem);
@@ -81,6 +84,9 @@
   /* — layout — */
   --content-max: 80rem;
   --content-padding: clamp(1.25rem, 4vw, 3rem);
+  --header-h: 4.5rem;
+  /* margen lateral alineado con .container (también a pantallas anchas) */
+  --gutter: max(var(--content-padding), calc((100vw - var(--content-max)) / 2 + var(--content-padding)));
 
   /* — movimiento — */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -93,20 +99,30 @@
   --radius-lg: 1.25rem;
   --radius-full: 999px;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-:root[data-theme="light"] {
-  color-scheme: light;
-  /* El fondo 3D ahora también se pone blanco en este modo (ver scene.js), así que el texto y los
-     bordes que flotan sobre él (héroe, eyebrows, párrafos sueltos) deben oscurecerse con él.
-     El header/nav es la única excepción: se fija a sus valores oscuros en layout.css, porque su
-     franja superior nunca deja de ser oscura. */
-  --color-text: var(--color-light-text);
-  --color-text-muted: var(--color-light-text-muted);
-  --color-border: var(--color-light-border);
-  /* El fondo de <body> vive detrás de la imagen de respaldo del canvas 3D (que es transparente)
-     mientras la escena todavía no carga; si no cambia con el tema, se ve oscuro un instante antes
-     de que la escena aplique su propio fondo — el "flash" de oscuro al entrar en modo claro. */
-  --color-bg: var(--color-light-surface);
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-surface-raised: var(--color-ink-800);
+  --color-text: #f1f3ea;
+  --color-text-muted: color-mix(in srgb, #f1f3ea 70%, transparent);
+  --color-text-faint: color-mix(in srgb, #f1f3ea 50%, transparent);
+  --color-border: color-mix(in srgb, #f1f3ea 16%, transparent);
+  --color-border-strong: color-mix(in srgb, #f1f3ea 36%, transparent);
+  --color-accent: var(--color-brand-light);
+  --color-emphasis: #a9c288;
+  --color-focus: var(--color-brand-light);
+  --color-btn-bg: var(--color-accent-solid);
+  --color-btn-bg-hover: var(--color-accent-solid-hover);
+  --color-btn-text: #ffffff;
+  --color-pill-bg: color-mix(in srgb, var(--color-ink-800) 82%, transparent);
+  --color-hotspot-dot: #8fae6d;
+  --color-node-line: color-mix(in srgb, var(--color-brand-light) 60%, transparent);
+  --color-node-dot: var(--color-ink-800);
+  --color-shadow: color-mix(in srgb, #000 40%, transparent);
+  --color-veil: color-mix(in srgb, var(--color-ink-950) 55%, transparent);
+  --color-node-amber: #f5a35a;
 }

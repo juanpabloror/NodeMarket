@@ -30,42 +30,55 @@
 
     <!--@include scene-->
 
-    <main id="contenido" data-page="servicios" data-formation="constelaciones">
-      <section class="page-hero container">
+    <main id="contenido" data-page="servicios" data-room data-formation="constelaciones">
+      <section class="page-hero page-hero--room container">
         <p data-reveal class="eyebrow">Servicios</p>
-        <h1 data-split>Soluciones a la medida, no plantillas</h1>
+        <h1 data-split>Soluciones a la medida, no <em>plantillas</em></h1>
         <p data-reveal>Cuatro formas de conectar tu negocio con más clientes, cada una construida alrededor de cómo trabajas.</p>
       </section>
 
-      <section class="section container">
-        <div data-stagger class="service-grid">
-          <!--@each site.servicios as servicio-->
-          <article class="service-card" id="{{ servicio.id }}" tabindex="-1">
-            <p class="service-card__index">0{{ servicioIndex }}</p>
-            <h2>{{ servicio.nombre }}</h2>
-            <p>{{ servicio.resumen }}</p>
-            <p>{{ servicio.detalle }}</p>
-          </article>
-          <!--@endeach-->
-        </div>
-      </section>
+      <div class="room-ui">
+        <p class="story__meta" aria-hidden="true">
+          <span class="story__scene-name">El taller de soluciones</span>
+          <span class="story__rule"></span>
+          <span class="story__count">Servicios</span>
+        </p>
+        <button type="button" class="story__toggle3d" data-toggle-3d>Vista sin 3D</button>
+        <button type="button" class="hotspot" data-hotspot="monitor" data-scroll-to=".room-panel"><span class="hotspot__pill"><span class="hotspot__dot" aria-hidden="true">+</span>Conoce el taller</span></button>
+      </div>
 
-      <section class="section section--veil">
-        <div class="container">
-          <div class="section__head">
-            <p data-reveal class="eyebrow">¿Cómo empezamos?</p>
-            <h2 data-split>Platicamos qué necesita tu negocio, sin compromiso</h2>
+      <div class="room-panel" data-lenis-prevent tabindex="0" role="region" aria-label="Contenido de la página">
+  
+        <section class="section container">
+          <div data-stagger class="service-grid">
+            <!--@each site.servicios as servicio-->
+            <article class="service-card" id="{{ servicio.id }}" tabindex="-1">
+              <p class="service-card__index">0{{ servicioIndex }}</p>
+              <h2>{{ servicio.nombre }}</h2>
+              <p>{{ servicio.resumen }}</p>
+              <p>{{ servicio.detalle }}</p>
+            </article>
+            <!--@endeach-->
           </div>
-          <a
-            data-reveal class="btn btn--accent btn--lg"
-            href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
-            target="_blank"
-            rel="noopener"
-          >
-            Hablar por WhatsApp
-          </a>
-        </div>
-      </section>
+        </section>
+  
+        <section class="section section--veil">
+          <div class="container">
+            <div class="section__head">
+              <p data-reveal class="eyebrow">¿Cómo empezamos?</p>
+              <h2 data-split>Platicamos qué necesita tu negocio, sin compromiso</h2>
+            </div>
+            <a
+              data-reveal class="btn btn--accent btn--lg"
+              href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+              target="_blank"
+              rel="noopener"
+            >
+              Hablar por WhatsApp
+            </a>
+          </div>
+        </section>
+      </div>
     </main>
 
     <!--@include footer-->

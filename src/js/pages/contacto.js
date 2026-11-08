@@ -1,7 +1,7 @@
-import { definePage } from '../dom/page.js';
+import { defineRoomPage } from '../dom/room.js';
 
 // El formulario arma el mensaje de WhatsApp con los datos capturados.
-export const { init, destroy } = definePage((container) => {
+export const { init, destroy } = defineRoomPage(8, (container) => {
   const form = container.querySelector('#contact-form');
   if (!form) return;
 

@@ -3,7 +3,7 @@ import SwupHeadPlugin from '@swup/head-plugin';
 import Lenis from 'lenis';
 import { gsap, ScrollTrigger } from './gsap.js';
 import { setupMagnetic } from './dom/magnetic.js';
-import { emit, setState, state } from '../state.js';
+import { emit, on, setState, state } from '../state.js';
 
 const modules = import.meta.glob('./pages/*.js', { eager: true });
 const root = document.documentElement;
@@ -36,6 +36,12 @@ motion.add('(prefers-reduced-motion: no-preference)', () => {
 
 motion.add('(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)', () => setupMagnetic());
 
+// Otros módulos piden desplazarse con emit('scrollTo', { y, duration }) para pasar por Lenis.
+on('scrollTo', ({ y, duration = 1 }) => {
+  if (lenis) lenis.scrollTo(y, { duration, easing: (t) => 1 - Math.pow(1 - t, 3) });
+  else window.scrollTo({ top: y, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+});
+
 /* — progreso de scroll → estado compartido con la escena 3D — */
 
 const progress = { value: 0 };
@@ -64,6 +70,8 @@ function enterPage({ announce }) {
   main.setAttribute('tabindex', '-1');
   page = modules[`./pages/${main.dataset.page}.js`] ?? null;
   page?.init?.(main);
+  // las páginas sin vista de la oficina apagan la casa (las demás la mantienen para que la cámara viaje entre vistas)
+  if (!('room' in main.dataset)) setState({ houseActive: false, hotspots: [], houseExit: 0 });
   setState({ formation: main.dataset.formation ?? 'calma', activeGroup: -1 });
   markNav();
   ScrollTrigger.refresh();
@@ -134,7 +142,7 @@ const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 function applyTheme(theme) {
   root.dataset.theme = theme;
   themeToggle?.setAttribute('aria-label', theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
-  themeColorMeta?.setAttribute('content', theme === 'light' ? '#ffffff' : '#05060b');
+  themeColorMeta?.setAttribute('content', theme === 'light' ? '#f4f3ec' : '#07090f');
   setState({ theme });
 }
 
@@ -170,8 +178,13 @@ const sceneEl = document.getElementById('node-scene');
 if (sceneEl && window.self === window.top) {
   const loadScene = () =>
     import('../background/scene.js')
-      .then((scene) => scene.start(sceneEl))
-      .catch((err) => console.error('No se pudo iniciar el fondo 3D.', err));
+      .then((scene) => {
+        if (!scene.start(sceneEl)) emit('webglFailed');
+      })
+      .catch((err) => {
+        console.error('No se pudo iniciar el fondo 3D.', err);
+        emit('webglFailed');
+      });
   // La escena 3D espera a que la página termine de cargar para no competir con el contenido del héroe.
   const scheduleScene = () =>
     setTimeout(() => {

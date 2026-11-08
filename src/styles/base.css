@@ -9,7 +9,6 @@
 }
 
 html {
-  color-scheme: dark;
   scrollbar-gutter: stable;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: auto;
@@ -39,18 +38,14 @@ h2,
 h3,
 h4 {
   font-family: var(--font-heading);
-  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
   text-wrap: balance;
 }
 
 p {
   text-wrap: pretty;
-}
-
-/* Velo sutil bajo el texto: mantiene el contraste AA cuando un nodo brillante pasa por detrás */
-main :is(h1, h2, h3, p, summary, label) {
-  text-shadow: 0 0 1.1rem color-mix(in srgb, var(--color-ink-950) 10%, transparent),
-    0 0 0.3rem color-mix(in srgb, var(--color-ink-950) 10%, transparent);
 }
 
 a {
@@ -72,8 +67,8 @@ ol {
 }
 
 ::selection {
-  background: var(--color-brand);
-  color: var(--color-paper);
+  background: var(--color-sage-soft);
+  color: var(--color-forest);
 }
 
 :focus-visible {
@@ -88,8 +83,8 @@ ol {
   top: var(--space-sm);
   left: var(--space-sm);
   padding: var(--space-xs) var(--space-sm);
-  background: var(--color-paper);
-  color: var(--color-ink-text);
+  background: var(--color-forest);
+  color: var(--color-btn-text);
   border-radius: var(--radius-sm);
   font-weight: 600;
   transform: translateY(-150%);
@@ -121,4 +116,13 @@ ol {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Palabra de énfasis de los titulares: serif itálica en verde salvia */
+:is(h1, h2, h3) em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-emphasis);
 }

@@ -11,16 +11,29 @@
 
     <!--@include scene-->
 
-    <main id="contenido" data-page="notfound" data-formation="calma">
-      <section class="page-hero container">
+    <main id="contenido" data-page="notfound" data-room data-formation="calma">
+      <section class="page-hero page-hero--room container">
         <p data-reveal class="eyebrow">Error 404</p>
-        <h1 data-split>Esta página no existe</h1>
+        <h1 data-split>Esta página <em>no existe</em></h1>
         <p data-reveal>Puede que el enlace haya cambiado. Te llevamos de vuelta al inicio para retomar el camino.</p>
       </section>
 
-      <section class="section container">
-        <a data-reveal class="btn btn--accent btn--lg" href="/">Volver al inicio</a>
-      </section>
+      <div class="room-ui">
+        <p class="story__meta" aria-hidden="true">
+          <span class="story__scene-name">La puerta de entrada</span>
+          <span class="story__rule"></span>
+          <span class="story__count">Error 404</span>
+        </p>
+        <button type="button" class="story__toggle3d" data-toggle-3d>Vista sin 3D</button>
+        <a class="hotspot" data-hotspot="door" href="/"><span class="hotspot__pill"><span class="hotspot__dot" aria-hidden="true">↗</span>Volver al inicio</span></a>
+      </div>
+
+      <div class="room-panel" data-lenis-prevent tabindex="0" role="region" aria-label="Contenido de la página">
+  
+        <section class="section container">
+          <a data-reveal class="btn btn--accent btn--lg" href="/">Volver al inicio</a>
+        </section>
+      </div>
     </main>
 
     <!--@include footer-->

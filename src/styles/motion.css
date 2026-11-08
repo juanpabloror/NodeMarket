@@ -54,25 +54,20 @@ main {
 
 .node-line path {
   fill: none;
-  stroke: color-mix(in srgb, var(--color-brand-light) 60%, transparent);
+  stroke: var(--color-node-line);
   stroke-width: 1;
   stroke-linejoin: round;
 }
 
 .node-line circle {
-  fill: var(--color-ink-800);
-  stroke: color-mix(in srgb, var(--color-gray-500) 80%, transparent);
+  fill: var(--color-node-dot);
+  stroke: var(--color-border-strong);
   stroke-width: 1;
   transition: fill 0.5s var(--ease-out), stroke 0.5s var(--ease-out), filter 0.5s var(--ease-out);
 }
 
 .node-line circle.is-lit {
-  fill: var(--color-node-amber);
-  stroke: var(--color-node-amber);
-  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--color-node-amber) 80%, transparent));
-}
-
-/* Flota sobre el canvas: en modo claro (canvas blanco) el índigo claro casi no se ve. */
-:root[data-theme="light"] .node-line path {
-  stroke: color-mix(in srgb, var(--color-light-accent) 55%, transparent);
+  fill: var(--color-brand);
+  stroke: var(--color-brand);
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--color-brand) 70%, transparent));
 }

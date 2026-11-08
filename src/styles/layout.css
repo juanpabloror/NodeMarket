@@ -26,7 +26,7 @@
 
 .node-scene-fallback {
   object-fit: cover;
-  opacity: 0.6;
+  opacity: 0.5;
   transition: opacity var(--duration-slow) var(--ease-out);
 }
 
@@ -40,15 +40,10 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: linear-gradient(to bottom, var(--color-ink-950) 0%, var(--color-ink-950) 68%, transparent 100%);
-  padding-block: var(--space-2xs);
-}
-
-/* En oscuro el header se funde con el canvas mediante el degradado de arriba; en claro no hay
-   nada oscuro con qué fundirse, así que es una barra blanca sólida con un borde sutil. */
-:root[data-theme="light"] .site-header {
-  background: var(--color-light-surface);
-  border-bottom: 1px solid var(--color-light-border);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to bottom, var(--color-bg) 0%, var(--color-bg) 66%, transparent 100%);
 }
 
 .site-header__inner {
@@ -56,21 +51,21 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  padding-block: var(--space-xs);
 }
 
 .site-logo {
   display: flex;
   align-items: center;
-  gap: var(--space-2xs);
+  gap: 0.5rem;
   text-decoration: none;
   flex-shrink: 0;
+  color: var(--color-text);
 }
 
 .site-logo__mark {
-  width: clamp(1.75rem, 1.6rem + 0.5vw, 2.25rem);
+  width: clamp(1.6rem, 1.5rem + 0.4vw, 2rem);
   height: auto;
-  color: var(--color-gray-500);
+  color: var(--color-text-muted);
 }
 
 .site-logo__mark .nm-nodes {
@@ -78,40 +73,37 @@
 }
 
 .site-logo__mark .nm-links {
-  stroke: var(--color-gray-500);
+  stroke: currentColor;
 }
 
 .site-logo__word {
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: var(--step-1);
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: -0.04em;
   line-height: 1;
   white-space: nowrap;
 }
 
-.site-logo__word b {
-  font-weight: 700;
-  color: var(--color-brand);
-}
-
-.site-logo__word span {
+.site-logo__word sup {
+  font-size: 0.45em;
   font-weight: 500;
-  color: var(--color-gray-300);
+  margin-left: 0.1em;
+  vertical-align: super;
+  letter-spacing: 0;
 }
 
 .nav-toggle {
   display: none;
 }
 
-/* El botón de tema vive dentro del header/nav, que siempre se funde con el canvas oscuro,
-   así que su estilo no cambia entre modos (igual que los links del nav). */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: var(--radius-full);
   border: 1px solid var(--color-border);
   background: transparent;
@@ -123,7 +115,7 @@
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   color: var(--color-text);
-  border-color: var(--color-brand-light);
+  border-color: var(--color-border-strong);
 }
 
 .theme-toggle__icon {
@@ -135,32 +127,48 @@
   display: none;
 }
 
-:root[data-theme="light"] .theme-toggle__icon--sun {
+:root[data-theme="light"] .theme-toggle__icon--sun,
+:root:not([data-theme]) .theme-toggle__icon--sun {
   display: none;
 }
 
-:root[data-theme="light"] .theme-toggle__icon--moon {
+:root[data-theme="light"] .theme-toggle__icon--moon,
+:root:not([data-theme]) .theme-toggle__icon--moon {
   display: block;
 }
 
 .site-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .site-nav ul {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   font-size: var(--step--1);
 }
 
 .site-nav a:not(.btn) {
+  position: relative;
   white-space: nowrap;
   text-decoration: none;
   color: var(--color-text-muted);
   transition: color var(--duration-fast) var(--ease-out);
+}
+
+.site-nav ul a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.3rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
 .site-nav a:not(.btn):hover,
@@ -169,20 +177,26 @@
   color: var(--color-text);
 }
 
-@media (max-width: 74.9375rem) {
+.site-nav ul a:hover::after,
+.site-nav ul a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 79.9375rem) {
   .nav-toggle {
     display: grid;
     place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: var(--radius-full);
     border: 1px solid var(--color-border);
     cursor: pointer;
+    color: var(--color-text);
   }
 
   .nav-toggle__bars {
     position: relative;
-    width: 1.125rem;
+    width: 1.05rem;
     height: 2px;
     background: currentColor;
   }
@@ -213,14 +227,15 @@
 
   .site-nav {
     position: fixed;
-    inset: 4.5rem var(--content-padding) auto;
+    inset: calc(var(--header-h) - 0.25rem) var(--content-padding) auto;
     flex-direction: column;
     align-items: stretch;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     padding: var(--space-lg);
-    background: var(--color-surface);
+    background: var(--color-surface-raised);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
+    box-shadow: 0 1.5rem 3rem -1rem var(--color-shadow);
     transform: translateY(-0.5rem);
     opacity: 0;
     visibility: hidden;
@@ -234,34 +249,14 @@
     font-size: var(--step-0);
   }
 
+  .site-nav .theme-toggle {
+    align-self: flex-start;
+  }
+
   .nav-toggle-input:checked ~ .site-nav {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-  }
-}
-
-/* El header ahora también se pone blanco en modo claro (ver .site-header más abajo), así que su
-   texto/bordes (theme-toggle, links del nav, hamburguesa) ya no se fijan a un valor oscuro fijo:
-   heredan --color-text-muted/--color-text/--color-border, que ya cambian con el tema. */
-
-/* El wordmark y el ícono del logo usan grises pensados para fondo oscuro; sobre blanco quedarían
-   casi invisibles, así que se oscurecen en modo claro. */
-:root[data-theme="light"] .site-logo__mark {
-  color: var(--color-gray-700);
-}
-
-:root[data-theme="light"] .site-logo__mark .nm-links {
-  stroke: var(--color-gray-700);
-}
-
-:root[data-theme="light"] .site-logo__word span {
-  color: var(--color-gray-700);
-}
-
-@media (max-width: 74.9375rem) {
-  :root[data-theme="light"] .site-nav {
-    background: var(--color-light-surface);
   }
 }
 
@@ -271,7 +266,7 @@
   position: relative;
   padding-block: var(--space-xl) var(--space-lg);
   border-top: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-ink-950) 70%, transparent);
+  background: var(--color-surface);
 }
 
 .site-footer__grid {
@@ -282,17 +277,17 @@
 
 .site-footer__brand p {
   margin-top: var(--space-xs);
-  max-width: 28ch;
+  max-width: 30ch;
   color: var(--color-text-muted);
 }
 
 .site-footer__title {
-  font-size: var(--step--1);
+  font-size: var(--step--2);
   font-family: var(--font-body);
   font-weight: 600;
-  color: var(--color-text-muted);
+  letter-spacing: 0.16em;
+  color: var(--color-text-faint);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
   margin-bottom: var(--space-sm);
 }
 
@@ -301,14 +296,14 @@
   gap: var(--space-xs);
 }
 
-.site-footer a {
+.site-footer a:not(.site-logo) {
   text-decoration: none;
   color: var(--color-text-muted);
   transition: color var(--duration-fast) var(--ease-out);
 }
 
-.site-footer a:hover,
-.site-footer a:focus-visible {
+.site-footer a:not(.site-logo):hover,
+.site-footer a:not(.site-logo):focus-visible {
   color: var(--color-text);
 }
 
@@ -321,7 +316,7 @@
   gap: var(--space-sm);
   justify-content: space-between;
   font-size: var(--step--1);
-  color: var(--color-text-muted);
+  color: var(--color-text-faint);
 }
 
 @media (max-width: 47.9375rem) {
@@ -354,34 +349,25 @@ main {
   z-index: -1;
 }
 
-/* Las secciones con velo (CTA de Inicio, Servicios y Paquetes) pasan a un panel blanco opaco en
-   modo claro: el velo translúcido oscuro ya no tiene sentido sobre un canvas que ahora es blanco. */
-:root[data-theme="light"] body[data-page="inicio"] .section--veil::before,
-:root[data-theme="light"] body[data-page="servicios"] .section--veil::before,
-:root[data-theme="light"] body[data-page="paquetes"] .section--veil::before {
-  background: var(--color-light-surface);
-}
-
-:root[data-theme="light"] body[data-page="inicio"] .section--veil :is(h1, h2, h3, p, summary, label),
-:root[data-theme="light"] body[data-page="servicios"] .section--veil :is(h1, h2, h3, p, summary, label),
-:root[data-theme="light"] body[data-page="paquetes"] .section--veil :is(h1, h2, h3, p, summary, label) {
-  text-shadow: none;
-}
-
 .section__head {
   max-width: 44rem;
   margin-bottom: var(--space-xl);
 }
 
+.section__head h2 {
+  font-size: var(--step-4);
+}
+
+/* Etiqueta pequeña en mayúsculas con punto verde */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2xs);
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  gap: 0.6rem;
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-brand-light);
+  color: var(--color-text);
   margin-bottom: var(--space-sm);
 }
 
@@ -390,57 +376,16 @@ main {
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 50%;
-  background: var(--color-node-amber);
+  background: var(--color-sage);
 }
 
-/* — héroe — */
-
-.hero {
-  min-height: min(52rem, 92svh);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding-block: var(--space-2xl) var(--space-xl);
-}
-
-.hero__eyebrow {
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-brand-light);
-  margin-bottom: var(--space-md);
-}
-
-.hero h1 {
-  font-size: var(--step-5);
-  max-width: 16ch;
-  margin-bottom: var(--space-md);
-}
-
-.hero h1 em {
-  font-style: normal;
-  color: var(--color-brand-light);
-}
-
-/* El eyebrow y el énfasis del héroe flotan sobre el canvas: en modo claro (canvas blanco) el
-   índigo claro casi no se ve, así que aquí usan la variante oscura del mismo acento. */
-:root[data-theme="light"] :is(.eyebrow, .hero__eyebrow, .hero h1 em) {
-  color: var(--color-light-accent);
-}
+/* — texto de apoyo — */
 
 .hero__lead {
   font-size: var(--step-1);
   max-width: 40ch;
   color: var(--color-text-muted);
   margin-bottom: var(--space-lg);
-}
-
-.hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
 }
 
 /* — utilidades de grilla — */
@@ -459,16 +404,16 @@ main {
 }
 
 .page-hero {
-  padding-block: var(--space-2xl) var(--space-xl);
+  padding-block: var(--space-xl) var(--space-lg);
 }
 
 .page-hero h1 {
-  font-size: var(--step-4);
-  max-width: 20ch;
-  margin-bottom: var(--space-sm);
+  font-size: clamp(2.8rem, 1.4rem + 4.2vw, 5.2rem);
+  max-width: 16ch;
+  margin-bottom: var(--space-md);
 }
 
-.page-hero p {
+.page-hero p:not(.eyebrow, .story__meta) {
   font-size: var(--step-1);
   max-width: 42ch;
   color: var(--color-text-muted);

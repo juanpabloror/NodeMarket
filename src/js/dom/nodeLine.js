@@ -1,4 +1,5 @@
 import { gsap, ScrollTrigger } from '../gsap.js';
+import { isPanelMode } from './layout.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const X = 7; // posición horizontal fija: la línea es recta, no un zigzag
@@ -12,6 +13,7 @@ const el = (name, attrs = {}) => {
 
 // Línea SVG que une las secciones de la página: se dibuja con el scroll y cada sección enciende su nodo.
 export function setupNodeLine(container, { motion }) {
+  if (isPanelMode()) return;
   const sections = [...container.querySelectorAll('.hero, .page-hero, .section')];
   if (sections.length < 2) return;
 

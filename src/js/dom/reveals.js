@@ -1,13 +1,16 @@
 import { gsap, ScrollTrigger, SplitText } from '../gsap.js';
+import { isPanelMode } from './layout.js';
 
 const START = 'top 88%';
 
 // Con movimiento: titulares por líneas con máscara (SplitText) y el resto con fade-up al entrar.
 // Sin movimiento: solo un fade corto. Los estados iniciales ocultos viven en motion.css bajo html.js.
 export function setupReveals(container, { motion }) {
-  const titles = container.querySelectorAll('[data-split]');
-  const fades = [...container.querySelectorAll('[data-reveal]')];
-  const grouped = [...container.querySelectorAll('[data-stagger]')].flatMap((group) => [...group.children]);
+  // El contenido del panel tiene su propio scroll: no depende del scroll de la página, así que no se anima al entrar.
+  const outside = (el) => !(isPanelMode() && el.closest('.room-panel'));
+  const titles = [...container.querySelectorAll('[data-split]')].filter(outside);
+  const fades = [...container.querySelectorAll('[data-reveal]')].filter(outside);
+  const grouped = [...container.querySelectorAll('[data-stagger]')].flatMap((group) => [...group.children]).filter(outside);
   const items = [...fades, ...grouped];
 
   if (!motion) {

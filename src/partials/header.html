@@ -3,9 +3,9 @@
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a href="/" class="site-logo">
+    <a href="/" class="site-logo" aria-label="Node Market, inicio">
       <!--@include logo-icon-->
-      <span class="site-logo__word"><b>NODE</b><span>MARKET</span></span>
+      <span class="site-logo__word">NodeMarket<sup>®</sup></span>
     </a>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle-input visually-hidden" />
@@ -20,15 +20,10 @@
         <li><a href="{{ item.href }}">{{ item.label }}</a></li>
         <!--@endeach-->
       </ul>
-      <a
-        class="btn btn--accent site-nav__cta"
-        href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
-        target="_blank"
-        rel="noopener"
-      >
-        Escríbenos
+      <a class="btn btn--outline site-nav__cta" href="/contacto/">
+        Hablemos de tu idea <span class="btn__arrow" aria-hidden="true">↗</span>
       </a>
-      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo claro">
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo oscuro">
         <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4.2" />
           <path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7" />

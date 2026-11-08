@@ -4,42 +4,81 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2xs);
-  padding: 0.85em 1.6em;
+  gap: 0.75rem;
+  padding: 0.85em 1.5em;
   border-radius: var(--radius-full);
-  font-weight: 600;
+  font-weight: 500;
   font-size: var(--step--1);
   text-decoration: none;
   border: 1px solid transparent;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 
+.btn__arrow {
+  display: inline-block;
+  font-size: 1.1em;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.btn:hover .btn__arrow,
+.btn:focus-visible .btn__arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Botón principal: tinta verde con texto crema (azul de marca en modo oscuro) */
 .btn--accent {
-  background: var(--color-accent-solid);
-  color: var(--color-paper);
+  background: var(--color-btn-bg);
+  color: var(--color-btn-text);
+  border-radius: var(--radius-sm);
 }
 
 .btn--accent:hover,
 .btn--accent:focus-visible {
-  background: var(--color-accent-solid-hover);
+  background: var(--color-btn-bg-hover);
+}
+
+.btn--outline {
+  background: color-mix(in srgb, var(--color-surface-raised) 55%, transparent);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+  padding: 0.95em 1.6em;
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background: var(--color-surface-raised);
+  border-color: var(--color-text);
 }
 
 .btn--ghost {
   background: transparent;
   color: var(--color-text);
-  border-color: var(--color-border);
+  border-color: var(--color-border-strong);
 }
 
 .btn--ghost:hover,
 .btn--ghost:focus-visible {
-  border-color: var(--color-brand-light);
-  color: var(--color-brand-light);
+  border-color: var(--color-text);
 }
 
 .btn--lg {
-  padding: 1em 2em;
+  padding: 1.05em 1.6em;
   font-size: var(--step-0);
+}
+
+.text-link {
+  color: var(--color-text);
+  text-decoration-color: var(--color-border-strong);
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color var(--duration-fast) var(--ease-out);
+}
+
+.text-link:hover,
+.text-link:focus-visible {
+  text-decoration-color: currentColor;
 }
 
 /* — tarjetas de servicio — */
@@ -54,29 +93,37 @@
   padding: var(--space-lg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--color-surface) 60%, transparent);
-  transition: border-color var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+  background: var(--color-surface);
+  transition: border-color var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
 }
 
 .service-card:hover,
 .service-card:focus-within {
-  border-color: var(--color-brand-light);
+  border-color: var(--color-border-strong);
+  box-shadow: 0 1.5rem 2.5rem -1.75rem var(--color-shadow);
 }
 
 .service-card__index {
   font-family: var(--font-display);
+  font-style: italic;
   font-size: var(--step-2);
-  color: var(--color-brand-light);
+  color: var(--color-emphasis);
   margin-bottom: var(--space-sm);
 }
 
+.service-card h2,
 .service-card h3 {
-  font-size: var(--step-1);
+  font-size: var(--step-2);
   margin-bottom: var(--space-xs);
 }
 
 .service-card p {
   color: var(--color-text-muted);
+}
+
+.service-card p + p {
+  margin-top: var(--space-xs);
 }
 
 @media (max-width: 55rem) {
@@ -108,16 +155,22 @@
 }
 
 .badge--abierta {
-  color: var(--color-node-amber);
-  border-color: color-mix(in srgb, var(--color-node-amber) 40%, transparent);
+  color: var(--color-sage-deep);
+  background: color-mix(in srgb, var(--color-sage-soft) 55%, transparent);
+  border-color: color-mix(in srgb, var(--color-sage) 45%, transparent);
+}
+
+:root[data-theme="dark"] .badge--abierta {
+  color: var(--color-emphasis);
+  background: color-mix(in srgb, var(--color-sage) 22%, transparent);
 }
 
 .badge--proximamente {
-  color: var(--color-gray-300);
+  color: var(--color-text-muted);
 }
 
 .badge--cerrada {
-  color: var(--color-gray-500);
+  color: var(--color-text-faint);
 }
 
 /* — ruta de paquetes — */
@@ -126,7 +179,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
-  counter-reset: stage;
 }
 
 .pricing-stage {
@@ -134,16 +186,17 @@
   padding: var(--space-lg) var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  background: var(--color-surface);
 }
 
 .pricing-stage[data-estado="abierta"] {
-  border-color: color-mix(in srgb, var(--color-node-amber) 55%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-node-amber) 20%, transparent), 0 1.5rem 3rem -1.5rem color-mix(in srgb, var(--color-node-amber) 45%, transparent);
+  background: var(--color-surface-raised);
+  border-color: color-mix(in srgb, var(--color-sage) 60%, transparent);
+  box-shadow: 0 1.5rem 3rem -1.75rem color-mix(in srgb, var(--color-sage) 70%, transparent);
 }
 
-.pricing-stage[data-estado="proximamente"]>* {
-  opacity: 0.78;
+.pricing-stage[data-estado="proximamente"] > * {
+  opacity: 0.8;
 }
 
 .pricing-stage__node {
@@ -151,12 +204,13 @@
   width: 0.85rem;
   height: 0.85rem;
   border-radius: 50%;
-  background: var(--color-gray-500);
+  background: var(--color-border-strong);
   margin-bottom: var(--space-md);
 }
 
 .pricing-stage[data-estado="abierta"] .pricing-stage__node {
-  background: var(--color-node-amber);
+  background: var(--color-brand);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-brand) 20%, transparent);
 }
 
 .pricing-stage .badge {
@@ -164,7 +218,7 @@
 }
 
 .pricing-stage__name {
-  font-size: var(--step-0);
+  font-size: var(--step-1);
   margin-bottom: var(--space-2xs);
 }
 
@@ -177,6 +231,7 @@
 .pricing-stage__precio {
   font-family: var(--font-heading);
   font-size: var(--step-2);
+  letter-spacing: -0.03em;
   margin-bottom: var(--space-2xs);
 }
 
@@ -188,7 +243,7 @@
 
 .pricing-stage__cupo {
   font-size: var(--step--1);
-  color: var(--color-brand-light);
+  color: var(--color-accent);
 }
 
 .pricing-stage__cupo:empty {
@@ -213,7 +268,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding-inline: var(--space-md);
-  background: color-mix(in srgb, var(--color-surface) 45%, transparent);
+  background: var(--color-surface);
+  transition: border-color var(--duration-base) var(--ease-out);
+}
+
+.faq-item[open] {
+  border-color: var(--color-border-strong);
 }
 
 .faq-item summary {
@@ -235,7 +295,7 @@
   content: "+";
   font-family: var(--font-heading);
   font-size: var(--step-1);
-  color: var(--color-brand-light);
+  color: var(--color-emphasis);
   flex-shrink: 0;
 }
 
@@ -264,7 +324,7 @@
 .form-field input,
 .form-field textarea {
   padding: var(--space-sm);
-  background: var(--color-surface);
+  background: var(--color-surface-raised);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   color: var(--color-text);
@@ -272,7 +332,8 @@
 
 .form-field input:focus-visible,
 .form-field textarea:focus-visible {
-  border-color: var(--color-brand-light);
+  border-color: var(--color-text);
+  outline-offset: 1px;
 }
 
 /* — vitrina 3D del portafolio — */
@@ -286,8 +347,6 @@
   display: grid;
   grid-auto-flow: column;
 }
-
-
 
 @media (max-width: 980px) {
   .grid_portafolio {
@@ -365,13 +424,13 @@
 
 .portfolio-showcase__controls button:hover,
 .portfolio-showcase__controls button:focus-visible {
-  border-color: var(--color-brand-light);
+  border-color: var(--color-text);
 }
 
-.portfolio-showcase__controls button[aria-pressed='true'] {
-  background: var(--color-accent-solid);
-  border-color: var(--color-accent-solid);
-  color: var(--color-paper);
+.portfolio-showcase__controls button[aria-pressed="true"] {
+  background: var(--color-btn-bg);
+  border-color: var(--color-btn-bg);
+  color: var(--color-btn-text);
 }
 
 /* — portafolio piloto — */
@@ -380,112 +439,15 @@
   display: grid;
   gap: var(--space-md);
   padding: var(--space-xl);
-  border: 1px dashed var(--color-border);
+  border: 1px dashed var(--color-border-strong);
   border-radius: var(--radius-lg);
+  background: var(--color-surface);
   text-align: center;
   justify-items: center;
   max-width: 40rem;
   margin-inline: auto;
 }
 
-/* — modo claro —
-   Solo las tarjetas, el formulario y el footer cambian: son las únicas superficies con fondo
-   propio. El resto del contenido flota directo sobre el canvas 3D (que se queda oscuro siempre),
-   así que se queda con su estilo actual en ambos modos. */
-
-:root[data-theme="light"] :is(.service-card, .pricing-stage, .faq-item, .site-footer) {
-  color: var(--color-light-text);
-}
-
-:root[data-theme="light"] .service-card {
-  background: var(--color-light-surface);
-  border-color: var(--color-light-border);
-}
-
-:root[data-theme="light"] .service-card p {
-  color: var(--color-light-text-muted);
-}
-
-:root[data-theme="light"] .service-card__index {
-  color: var(--color-light-accent);
-}
-
-:root[data-theme="light"] .service-card:hover,
-:root[data-theme="light"] .service-card:focus-within {
-  border-color: var(--color-light-accent);
-}
-
-:root[data-theme="light"] .pricing-stage {
-  background: var(--color-light-surface);
-  border-color: var(--color-light-border);
-}
-
-:root[data-theme="light"] .pricing-stage__condicion,
-:root[data-theme="light"] .pricing-stage__mensualidad {
-  color: var(--color-light-text-muted);
-}
-
-:root[data-theme="light"] .pricing-stage__cupo {
-  color: var(--color-light-accent);
-}
-
-:root[data-theme="light"] .badge,
-:root[data-theme="light"] .badge--proximamente,
-:root[data-theme="light"] .badge--cerrada {
-  color: var(--color-light-text-muted);
-}
-
-:root[data-theme="light"] .faq-item {
-  background: var(--color-light-surface);
-  border-color: var(--color-light-border);
-}
-
-:root[data-theme="light"] .faq-item p {
-  color: var(--color-light-text-muted);
-}
-
-:root[data-theme="light"] .faq-item summary::after {
-  color: var(--color-light-accent);
-}
-
-:root[data-theme="light"] .form-field input,
-:root[data-theme="light"] .form-field textarea {
-  background: var(--color-light-surface);
-  border-color: var(--color-light-border);
-  color: var(--color-light-text);
-}
-
-:root[data-theme="light"] .form-field input:focus-visible,
-:root[data-theme="light"] .form-field textarea:focus-visible {
-  border-color: var(--color-light-accent);
-}
-
-:root[data-theme="light"] .site-footer {
-  background: var(--color-light-surface);
-  border-color: var(--color-light-border);
-}
-
-:root[data-theme="light"] .site-footer__bottom {
-  border-color: var(--color-light-border);
-}
-
-:root[data-theme="light"] :is(.site-footer__brand p, .site-footer__title, .site-footer a, .site-footer__bottom) {
-  color: var(--color-light-text-muted);
-}
-
-:root[data-theme="light"] .site-footer a:hover,
-:root[data-theme="light"] .site-footer a:focus-visible {
-  color: var(--color-light-text);
-}
-
-:root[data-theme="light"] .portfolio-showcase__stage {
-  background: var(--color-light-surface);
-  border-color: var(--color-light-border);
-}
-
-/* El "velo" de texto está pensado para texto claro sobre el canvas oscuro; dentro de estas
-   superficies ya opacas y claras, ese halo se ve como una mancha y se quita. */
-:root[data-theme="light"] :is(.service-card, .pricing-stage, .faq-item, .site-footer, .form-field)
-  :is(h1, h2, h3, p, summary, label) {
-  text-shadow: none;
+.piloto-callout .hero__lead {
+  margin-bottom: 0;
 }

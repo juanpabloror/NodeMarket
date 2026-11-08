@@ -1,0 +1,909 @@
+/* — Inicio: el recorrido por "la casa" —
+   Base: las 3 escenas como bloques apilados (sin JS, sin WebGL, con movimiento reducido o "Vista sin 3D").
+   Con la clase html.story-3d (la pone el script de head-shared.html) el recorrido se ancla al scroll
+   y la casa 3D se dibuja detrás (ver src/background/house.js). */
+
+.story__stage {
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--space-md) var(--space-xl);
+}
+
+.story__panel {
+  width: min(42rem, 100%);
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.story__panel:first-child {
+  border-top: 0;
+  padding-top: var(--space-lg);
+}
+
+.story__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+:is(.story__meta, .story__stepper, .story__hint, .story__tagline, .hotspot) {
+  display: none;
+}
+
+.story__toggle3d {
+  display: none;
+  order: -1;
+  align-self: flex-start;
+  margin: 0 var(--gutter) var(--space-xs);
+  padding: 0 0 0.15rem;
+  border: 0;
+  border-bottom: 1px solid var(--color-border-strong);
+  background: transparent;
+  font-size: var(--step--2);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.js .story__toggle3d {
+  display: inline-block;
+}
+
+.story__toggle3d:hover,
+.story__toggle3d:focus-visible {
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+
+/* — texto de cada escena — */
+
+.story__title {
+  font-size: min(clamp(2.8rem, 1.2rem + 4.8vw, 5.9rem), 12.5svh);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  margin-bottom: var(--space-md);
+}
+
+.story__title--sm {
+  font-size: min(clamp(2.4rem, 1rem + 3.7vw, 4.4rem), 9svh);
+}
+
+.story__title em {
+  display: inline-block;
+  padding-right: 0.06em;
+}
+
+.story__lead {
+  font-size: var(--step-0);
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-width: 30rem;
+  margin-bottom: var(--space-md);
+}
+
+.story__note {
+  margin-top: var(--space-sm);
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+.story__kicker {
+  margin-top: 0.2rem;
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.story__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+}
+
+/* Lista de servicios (escena 2): cada fila se enlaza con un objeto de la casa */
+
+.story__services {
+  width: min(28rem, 100%);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-xs);
+}
+
+.story__services a {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-block: clamp(0.45rem, 1.3svh, 0.8rem);
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: padding var(--duration-base) var(--ease-out), background var(--duration-base) var(--ease-out);
+}
+
+.story__services .n {
+  font-size: var(--step--2);
+  color: var(--color-text-faint);
+  letter-spacing: 0.05em;
+}
+
+.story__services strong {
+  display: block;
+  font-weight: 500;
+  font-size: var(--step-0);
+  line-height: 1.25;
+}
+
+.story__services small {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--color-text-faint);
+  line-height: 1.35;
+}
+
+.story__services .go {
+  color: var(--color-text-muted);
+  transition: transform var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+.story__services a:hover,
+.story__services a:focus-visible,
+.story__services a.is-active {
+  padding-left: 0.5rem;
+  background: linear-gradient(to right, color-mix(in srgb, var(--color-sage-soft) 55%, transparent), transparent);
+}
+
+:root[data-theme="dark"] .story__services a:hover,
+:root[data-theme="dark"] .story__services a:focus-visible,
+:root[data-theme="dark"] .story__services a.is-active {
+  background: linear-gradient(to right, color-mix(in srgb, var(--color-sage) 30%, transparent), transparent);
+}
+
+.story__services a:hover .go,
+.story__services a:focus-visible .go,
+.story__services a.is-active .go {
+  transform: translate(2px, -2px);
+  color: var(--color-text);
+}
+
+.story__detail {
+  width: min(28rem, 100%);
+  min-height: 3.2em;
+  margin-top: var(--space-xs);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.story__aside {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  width: min(28rem, 100%);
+  font-size: var(--step--1);
+  color: var(--color-text-muted);
+}
+
+.story__aside svg {
+  flex: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--color-sage);
+}
+
+.story__aside strong {
+  display: block;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* ═══ Modo 3D: escenario fijado al scroll ═══ */
+
+.story-3d .story {
+  position: relative;
+  /* alto del escenario + distancia de scroll para recorrer las 3 escenas */
+  height: calc(100svh - var(--header-h) + 260svh);
+}
+
+.story-3d .story__stage {
+  position: sticky;
+  top: var(--header-h);
+  display: block;
+  height: calc(100svh - var(--header-h));
+  min-height: 34rem;
+  padding: 0;
+  overflow: clip;
+}
+
+/* velo crema a la izquierda: el texto siempre se lee, aunque la casa pase por detrás */
+.story-3d .story__stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--color-bg) 0%, color-mix(in srgb, var(--color-bg) 88%, transparent) 26%, transparent 56%);
+  pointer-events: none;
+}
+
+/* paneles de texto: uno por escena, apilados en la misma celda */
+
+.story-3d .story__panels {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: center;
+  pointer-events: none;
+  padding-bottom: 4.8rem;
+}
+
+.story-3d .story__panel {
+  grid-area: 1 / 1;
+  width: min(34rem, 100%);
+  padding-block: 0;
+  border-top: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 0.5s;
+}
+
+.story-3d .story__panel.is-active {
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+/* entrada escalonada de los hijos de cada panel */
+.story-3d .story__panel > * {
+  opacity: 0;
+  transform: translateY(1.1rem);
+  transition: opacity 0.45s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.story-3d .story__panel.is-active > * {
+  opacity: 1;
+  transform: none;
+}
+
+.story-3d .story__panel.is-active > :nth-child(1) { transition-delay: 0.12s; }
+.story-3d .story__panel.is-active > :nth-child(2) { transition-delay: 0.2s; }
+.story-3d .story__panel.is-active > :nth-child(3) { transition-delay: 0.3s; }
+.story-3d .story__panel.is-active > :nth-child(4) { transition-delay: 0.4s; }
+.story-3d .story__panel.is-active > :nth-child(5) { transition-delay: 0.48s; }
+.story-3d .story__panel.is-active > :nth-child(6) { transition-delay: 0.56s; }
+
+/* marcos del escenario: etiqueta de escena, pasos, ayudas */
+
+.story-3d .story__meta {
+  position: absolute;
+  top: 1rem;
+  right: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.story__meta::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--color-sage);
+}
+
+.story__rule {
+  width: 3.5rem;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+.story-3d .story__stepper {
+  position: absolute;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.1rem 0.55rem 0.6rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-pill-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1rem 2rem -1.5rem var(--color-shadow);
+}
+
+.story__stepper li {
+  display: contents;
+}
+
+.story__stepper li + li::before {
+  content: "";
+  width: 1.8rem;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+.story__step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.15rem 0.5rem 0.15rem 0.15rem;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  font-size: var(--step--1);
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.story__step span {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  font-size: var(--step--2);
+  color: var(--color-text-faint);
+  transition: background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+.story__step:hover,
+.story__step[aria-current="step"] {
+  color: var(--color-text);
+}
+
+.story__step[aria-current="step"] span {
+  background: var(--color-sage-soft);
+  color: var(--color-forest);
+}
+
+.story-3d :is(.story__hint, .story__tagline) {
+  position: absolute;
+  bottom: 1.6rem;
+  display: block;
+  font-size: var(--step--2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  pointer-events: none;
+}
+
+.story-3d .story__hint {
+  left: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.story__hint span {
+  font-size: 1.1rem;
+  letter-spacing: 0;
+}
+
+.story-3d .story__tagline {
+  right: var(--gutter);
+}
+
+.story-3d .story__toggle3d {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  order: 0;
+  right: var(--gutter);
+  bottom: 3.9rem;
+  margin: 0;
+}
+
+/* puntos interactivos sobre la casa (los posiciona la escena 3D desde sus nodos) */
+
+.story-3d .hotspot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.45s var(--ease-out);
+}
+
+.story-3d .hotspot.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hotspot__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.32rem 0.95rem 0.32rem 0.32rem;
+  border-radius: var(--radius-full);
+  background: var(--color-pill-bg);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0.6rem 1.4rem -0.6rem var(--color-shadow), 0 0 0 1px color-mix(in srgb, var(--color-text) 6%, transparent);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+  transform: translate(-50%, -100%);
+  transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+
+.hotspot__dot {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--color-hotspot-dot);
+  color: var(--color-forest);
+  font-size: 0.8rem;
+  line-height: 1;
+  transition: background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+/* latido suave: invita a tocar */
+.hotspot.is-visible .hotspot__dot {
+  animation: hotspot-pulse 2.6s ease-out infinite;
+}
+
+@keyframes hotspot-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-brand) 45%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 0.7rem transparent; }
+}
+
+.hotspot:hover .hotspot__pill,
+.hotspot:focus-visible .hotspot__pill,
+.hotspot.is-active .hotspot__pill {
+  transform: translate(-50%, -100%) scale(1.06);
+  box-shadow: 0 0.9rem 1.8rem -0.6rem var(--color-shadow), 0 0 0 1px color-mix(in srgb, var(--color-brand) 55%, transparent);
+}
+
+.hotspot:hover .hotspot__dot,
+.hotspot:focus-visible .hotspot__dot,
+.hotspot.is-active .hotspot__dot {
+  background: var(--color-accent-solid);
+  color: #fff;
+}
+
+.hotspot:focus-visible {
+  outline: none;
+}
+
+.hotspot:focus-visible .hotspot__pill {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ═══ Pantallas angostas: texto arriba, casa abajo ═══ */
+
+@media (max-width: 55rem) {
+  .story-3d .story__stage::before {
+    background: linear-gradient(to bottom, var(--color-bg) 0%, color-mix(in srgb, var(--color-bg) 86%, transparent) 30%, transparent 50%);
+  }
+
+  .story-3d .story__panels {
+    align-items: start;
+    padding-top: 0.75rem;
+    padding-bottom: 0;
+  }
+
+  .story-3d .story__panel {
+    width: min(26rem, 100%);
+  }
+
+  .story-3d .story__title {
+    font-size: clamp(2.3rem, 9.5vw, 3.4rem);
+    margin-bottom: var(--space-xs);
+  }
+
+  .story-3d .story__title--sm {
+    font-size: clamp(2rem, 8vw, 2.9rem);
+  }
+
+  .story-3d .story__lead {
+    font-size: var(--step--1);
+    line-height: 1.55;
+    margin-bottom: var(--space-sm);
+  }
+
+  .story-3d .story__panel .eyebrow {
+    margin-bottom: var(--space-2xs);
+  }
+
+  .story-3d .hotspot__pill {
+    gap: 0.4rem;
+    padding: 0.22rem 0.65rem 0.22rem 0.22rem;
+    font-size: var(--step--2);
+  }
+
+  .story-3d .hotspot__dot {
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 0.7rem;
+  }
+
+  .story-3d :is(.story__services, .story__aside, .story__note, .story__kicker, .story__hint, .story__tagline, .story__meta) {
+    display: none;
+  }
+
+  .story-3d .story__toggle3d {
+    right: var(--gutter);
+    bottom: 3.6rem;
+  }
+
+  .story-3d .story__stepper {
+    bottom: 0.9rem;
+    gap: 0.3rem;
+    padding-inline: 0.4rem 0.7rem;
+  }
+
+  .story__stepper li + li::before {
+    width: 0.8rem;
+  }
+
+  .story__step {
+    font-size: var(--step--2);
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .story__step {
+    padding-right: 0.2rem;
+  }
+
+  .story__step:not([aria-current="step"]) {
+    font-size: 0;
+    gap: 0;
+  }
+}
+
+/* ═══ Páginas internas: cada una es una parte distinta de la oficina ═══
+   La cámara de la casa (src/background/house.js) apunta a un objeto según la página.
+   - Pantallas anchas (html.story-3d, ≥62rem): la oficina queda fija; el texto va a la izquierda y el
+     contenido vive en un panel con scroll propio, a la derecha, unido al objeto por una línea.
+   - Angostas: la portada ocupa la pantalla y el contenido baja con el scroll sobre un velo crema.
+   - Sin 3D: contenido normal. */
+
+.room-ui .story__toggle3d {
+  order: 0;
+  display: inline-block;
+  margin: var(--space-sm) 0 0;
+}
+
+.room-ui .story__meta {
+  display: none;
+}
+
+.room-ui .hotspot {
+  display: none;
+}
+
+.room-link {
+  display: none;
+}
+
+/* — 3D en pantallas angostas: portada a pantalla completa y contenido debajo — */
+
+.story-3d .page-hero--room {
+  position: relative;
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-block: var(--space-sm) 5rem;
+}
+
+.story-3d .page-hero--room::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -8rem;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  background: linear-gradient(to bottom, var(--color-bg) 0%, color-mix(in srgb, var(--color-bg) 86%, transparent) 30%, transparent 52%);
+  pointer-events: none;
+}
+
+.story-3d .page-hero--room > * {
+  position: relative;
+}
+
+.story-3d .page-hero--room h1 {
+  font-size: clamp(2.2rem, 9vw, 3.2rem);
+  max-width: 12ch;
+}
+
+.story-3d .page-hero--room p:not(.eyebrow) {
+  max-width: 30rem;
+  font-size: var(--step--1);
+  line-height: 1.55;
+}
+
+.story-3d .room-ui {
+  position: absolute;
+  top: calc(100svh - var(--header-h) - 3.2rem);
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 3;
+}
+
+.story-3d .room-ui .story__toggle3d {
+  position: absolute;
+  right: 0;
+  margin: 0;
+}
+
+.story-3d .room-ui .hotspot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.45s var(--ease-out);
+}
+
+.story-3d .room-ui .hotspot.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.story-3d .room-panel {
+  position: relative;
+}
+
+.story-3d .room-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  background: linear-gradient(to bottom, transparent 0, color-mix(in srgb, var(--color-bg) 96%, transparent) 8rem);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* — 3D en pantallas anchas: la oficina fija y el contenido en un panel anclado al objeto — */
+
+@media (min-width: 62rem) {
+  .story-3d main[data-room]:not([data-page="inicio"]) {
+    height: calc(100svh - var(--header-h));
+    min-height: 34rem;
+    overflow: clip;
+  }
+
+  /* velo crema a la izquierda para que el texto siempre se lea */
+  .story-3d main[data-room]:not([data-page="inicio"])::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--color-bg) 0%, color-mix(in srgb, var(--color-bg) 88%, transparent) 20%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .story-3d .page-hero--room {
+    position: absolute;
+    z-index: 2;
+    inset: 0 auto 0 0;
+    width: calc(var(--gutter) + min(24rem, 27vw));
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0 1rem 4.5rem var(--gutter);
+    justify-content: center;
+  }
+
+  .story-3d .page-hero--room::before {
+    display: none;
+  }
+
+  .story-3d .page-hero--room h1 {
+    font-size: min(clamp(2rem, 0.8rem + 2.5vw, 3.6rem), 9.5svh);
+    max-width: none;
+  }
+
+  .story-3d .page-hero--room p:not(.eyebrow) {
+    font-size: var(--step-0);
+    line-height: 1.65;
+  }
+
+  .story-3d .room-ui {
+    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+  }
+
+  .story-3d .room-ui .story__meta {
+    position: absolute;
+    top: 0.5rem;
+    right: var(--gutter);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    font-size: var(--step--2);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .story-3d .room-ui .story__meta::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--color-sage);
+  }
+
+  .story-3d .room-ui .story__toggle3d {
+    left: var(--gutter);
+    right: auto;
+    bottom: 1.4rem;
+    top: auto;
+    pointer-events: auto;
+    z-index: 4;
+  }
+
+  .story-3d .room-link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out);
+  }
+
+  .story-3d .room-link line {
+    stroke: var(--color-brand);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 5;
+    opacity: 0.8;
+  }
+
+  .story-3d .room-link circle {
+    fill: var(--color-bg);
+    stroke: var(--color-brand);
+    stroke-width: 2;
+  }
+
+  .story-3d .room-panel {
+    position: absolute;
+    z-index: 3;
+    top: 2.4rem;
+    bottom: 0.9rem;
+    right: var(--gutter);
+    width: clamp(22rem, 29vw, 31rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--color-surface-raised) 95%, transparent);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2rem 4rem -2rem var(--color-shadow);
+    scrollbar-width: thin;
+  }
+
+  .story-3d .room-panel::before {
+    display: none;
+  }
+
+  .story-3d .room-panel:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* el contenido de la página, a la medida del panel */
+  .story-3d .room-panel .section {
+    padding: var(--space-md);
+  }
+
+  .story-3d .room-panel .section.container {
+    max-width: none;
+    padding-inline: var(--space-md);
+  }
+
+  .story-3d .room-panel .section--veil::before {
+    display: none;
+  }
+
+  .story-3d .room-panel .section + .section {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .story-3d .room-panel :is(.service-grid, .pricing-path, .grid-2) {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .story-3d .room-panel .section__head {
+    margin-bottom: var(--space-md);
+  }
+
+  .story-3d .room-panel .section__head h2 {
+    font-size: var(--step-2);
+  }
+
+  .story-3d .room-panel :is(.service-card, .pricing-stage) {
+    padding: var(--space-md);
+  }
+
+  .story-3d .room-panel .service-card h2,
+  .story-3d .room-panel .pricing-stage__name {
+    font-size: var(--step-1);
+  }
+
+  .story-3d .room-panel .hero__lead {
+    font-size: var(--step-0);
+    margin-bottom: var(--space-md);
+  }
+
+  .story-3d .room-panel .piloto-callout {
+    padding: var(--space-md);
+  }
+
+  .story-3d .room-panel .portfolio-showcase {
+    max-width: none;
+  }
+
+  .story-3d .room-panel .grid_portafolio {
+    display: block;
+  }
+
+  /* la línea punteada ya une el objeto con su panel; el rótulo flotante estorbaría al texto */
+  .story-3d .room-ui .hotspot {
+    display: none;
+  }
+
+  .story-3d .room-panel .btn--lg {
+    font-size: var(--step--1);
+    padding: 0.9em 1.3em;
+  }
+
+  /* sin animación de entrada por scroll de página: el panel tiene su propio scroll */
+  .story-3d .room-panel [data-split] {
+    visibility: visible !important;
+  }
+
+  .story-3d .room-panel [data-reveal],
+  .story-3d .room-panel [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

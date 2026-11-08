@@ -1,6 +1,7 @@
 import { Color, PerspectiveCamera, Scene, Vector2, WebGLRenderer } from 'three';
 import { gsap } from 'gsap';
 import { DEFAULT_COLORS, NodeNetwork } from './NodeNetwork.js';
+import { createHouse } from './house.js';
 import { TIERS, createFpsMonitor, forcedTier, initialTier, nextLowerTier } from './quality.js';
 import { on, state } from '../state.js';
 
@@ -23,7 +24,7 @@ const readTheme = () => ({
 export function start(container) {
   let renderer;
   try {
-    renderer = new WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+    renderer = new WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   } catch {
     return null;
   }
@@ -42,6 +43,7 @@ export function start(container) {
   let tier = TIERS[tierName];
   const network = new NodeNetwork(scene, camera, {
     nodeCount: TIERS.high.count,
+    nodeSize: 15,
     initialCount: tier.count,
     reducedMotion: reducedMotion.matches,
   });
@@ -53,14 +55,34 @@ export function start(container) {
     scene.background = isLight ? lightBg : darkBg;
     network.setColors({ ...(isLight ? light.colors : DEFAULT_COLORS), additive: !isLight });
     setBloom(tier.bloom && !isLight);
-    if (!running) draw();
+    house?.setTheme(theme);
+    if (!running) staticHouseFrame();
   };
 
   let bloom = null;
   let bloomWanted = false;
   let size = { width: 1, height: 1, pixelRatio: 1 };
 
-  const draw = () => (bloom ? bloom.composer.render() : renderer.render(scene, camera));
+  // La casa (inicio) vive en una segunda escena que se dibuja encima de la red de nodos; se crea la primera vez que se necesita.
+  let house = null;
+  const houseOn = () => state.houseActive && state.house3d && !!house;
+  const ensureHouse = () => {
+    if (house || !state.houseActive || !state.house3d) return;
+    house = createHouse(renderer);
+    house.setTheme(state.theme);
+    house.resize(size.width, size.height, size.pixelRatio);
+  };
+  const staticHouseFrame = () => {
+    ensureHouse();
+    if (houseOn()) house.update(0, state, { snap: true });
+    draw();
+  };
+
+  const draw = () => {
+    if (bloom) bloom.composer.render();
+    else renderer.render(scene, camera);
+    if (houseOn()) house.render();
+  };
   const monitor = forcedTier()
     ? null
     : createFpsMonitor(() => {
@@ -71,7 +93,10 @@ export function start(container) {
   const tick = (_time, deltaMs) => {
     network.setScroll(state.scroll);
     network.setFocus(state.activeGroup);
-    network.update(Math.min(deltaMs / 1000, 0.05));
+    const dt = Math.min(deltaMs / 1000, 0.05);
+    network.update(dt);
+    ensureHouse();
+    if (houseOn()) house.update(dt, state);
     draw();
     monitor?.sample();
   };
@@ -109,6 +134,7 @@ export function start(container) {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     network.resize(size);
+    house?.resize(width, height, size.pixelRatio);
     resizeBloom();
     if (!running) {
       network.update(0);
@@ -167,6 +193,8 @@ export function start(container) {
   const offStages = on('stages', () => state.formation === 'ruta' && applyFormation());
   const offBurst = on('burst', () => network.burst());
   const offTheme = on('theme', applyTheme);
+  const offHouse = ['house', 'houseExit', 'houseActive', 'house3d', 'doorOpen', 'hotspotHover', 'hotspots'].map((key) => on(key, () => !running && staticHouseFrame()));
+  const offPulse = on('housePulse', (id) => house?.pulse(id));
 
   const observer = new ResizeObserver(resize);
   observer.observe(container);
@@ -189,6 +217,9 @@ export function start(container) {
       offStages();
       offBurst();
       offTheme();
+      offHouse.forEach((off) => off());
+      offPulse();
+      house?.dispose();
       observer.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       reducedMotion.removeEventListener('change', onMotionChange);

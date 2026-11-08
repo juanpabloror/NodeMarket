@@ -6,6 +6,16 @@ export const state = {
   activeGroup: -1,
   stages: [],
   theme: document.documentElement.dataset.theme || 'light',
+  // la casa del inicio: house = escena (0..2, continuo), houseExit = px que ya salió de pantalla
+  houseActive: false,
+  house3d: document.documentElement.classList.contains('story-3d'),
+  house: 0,
+  houseExit: 0,
+  doorOpen: false,
+  housePanel: false, // true = páginas con panel anclado al objeto (la casa se centra y el contenido va a la derecha)
+  anchorScreen: { x: 0, y: 0, on: false }, // posición en pantalla del objeto de la página (se muta sin emitir)
+  hotspotHover: '',
+  hotspots: [],
 };
 
 export function on(event, handler) {

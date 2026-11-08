@@ -27,22 +27,35 @@
 
     <!--@include scene-->
 
-    <main id="contenido" data-page="faq" data-formation="calma">
-      <section class="page-hero container">
+    <main id="contenido" data-page="faq" data-room data-formation="calma">
+      <section class="page-hero page-hero--room container">
         <p data-reveal class="eyebrow">Preguntas frecuentes</p>
-        <h1 data-split>Dudas comunes, respuestas claras</h1>
+        <h1 data-split>Dudas comunes, <em>respuestas claras</em></h1>
       </section>
 
-      <section class="section container">
-        <div data-stagger class="faq-list">
-          <!--@each site.faq as item-->
-          <details class="faq-item">
-            <summary>{{ item.pregunta }}</summary>
-            <p>{{ item.respuesta }}</p>
-          </details>
-          <!--@endeach-->
-        </div>
-      </section>
+      <div class="room-ui">
+        <p class="story__meta" aria-hidden="true">
+          <span class="story__scene-name">El archivero de respuestas</span>
+          <span class="story__rule"></span>
+          <span class="story__count">Preguntas</span>
+        </p>
+        <button type="button" class="story__toggle3d" data-toggle-3d>Vista sin 3D</button>
+        <button type="button" class="hotspot" data-hotspot="cabinet" data-scroll-to=".room-panel"><span class="hotspot__pill"><span class="hotspot__dot" aria-hidden="true">+</span>Abre un cajón</span></button>
+      </div>
+
+      <div class="room-panel" data-lenis-prevent tabindex="0" role="region" aria-label="Contenido de la página">
+  
+        <section class="section container">
+          <div data-stagger class="faq-list">
+            <!--@each site.faq as item-->
+            <details class="faq-item">
+              <summary>{{ item.pregunta }}</summary>
+              <p>{{ item.respuesta }}</p>
+            </details>
+            <!--@endeach-->
+          </div>
+        </section>
+      </div>
     </main>
 
     <!--@include footer-->

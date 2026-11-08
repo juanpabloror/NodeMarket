@@ -18,36 +18,69 @@
     }
   },
   "nav": [
-    { "label": "Inicio", "href": "/" },
-    { "label": "Servicios", "href": "/servicios/" },
-    { "label": "Paquetes", "href": "/paquetes/" },
-    { "label": "Portafolio", "href": "/portafolio/" },
-    { "label": "Nosotros", "href": "/nosotros/" },
-    { "label": "Preguntas frecuentes", "href": "/preguntas-frecuentes/" },
-    { "label": "Contacto", "href": "/contacto/" }
+    {
+      "label": "Inicio",
+      "href": "/"
+    },
+    {
+      "label": "Servicios",
+      "href": "/servicios/"
+    },
+    {
+      "label": "Paquetes",
+      "href": "/paquetes/"
+    },
+    {
+      "label": "Portafolio",
+      "href": "/portafolio/"
+    },
+    {
+      "label": "Nosotros",
+      "href": "/nosotros/"
+    },
+    {
+      "label": "Preguntas frecuentes",
+      "href": "/preguntas-frecuentes/"
+    },
+    {
+      "label": "Contacto",
+      "href": "/contacto/"
+    }
   ],
   "servicios": [
     {
       "id": "aplicaciones",
       "nombre": "Desarrollo de aplicaciones",
+      "etiqueta": "Apps a la medida",
+      "claves": "Pedidos · Reservas · Control interno",
+      "anchor": "monitor",
       "resumen": "Apps a la medida para pedidos, reservas o control interno, pensadas para cómo trabaja tu negocio.",
       "detalle": "Nada de plantillas genéricas: construimos la app alrededor de tu manera de operar, para que tu equipo la use sin fricción desde el primer día."
     },
     {
       "id": "sitios-web",
       "nombre": "Sitios web",
+      "etiqueta": "Sitios web",
+      "claves": "Páginas · Catálogos · Contacto",
+      "anchor": "board",
       "resumen": "Sitios rápidos y claros que explican qué haces y facilitan que te contacten.",
       "detalle": "Diseño propio, sin plantillas de terceros. Tu sitio se ve y se siente como tu negocio, no como una copia de otro."
     },
     {
       "id": "redes-sociales",
       "nombre": "Manejo de redes sociales",
+      "etiqueta": "Redes sociales",
+      "claves": "Calendario · Publicaciones · Mensajes",
+      "anchor": "sofa",
       "resumen": "Calendario, publicaciones y respuesta a mensajes, para que tus redes trabajen todos los días.",
       "detalle": "Planeamos contenido pensado en tus clientes reales, no en tendencias genéricas que no aplican a tu negocio."
     },
     {
       "id": "contenido-multimedia",
       "nombre": "Contenido multimedia",
+      "etiqueta": "Contenido",
+      "claves": "Foto · Video · Piezas gráficas",
+      "anchor": "shelf",
       "resumen": "Fotografía, video y piezas gráficas para que tu negocio se vea profesional en todos lados.",
       "detalle": "Producimos contenido propio de tu negocio: tu espacio, tus productos, tu gente. Nada de bancos de imágenes."
     }

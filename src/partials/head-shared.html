@@ -1,6 +1,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" content="#f4f3ec" />
 <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="stylesheet" href="/src/styles/main.css" />
@@ -13,9 +13,17 @@
     try {
       root.dataset.theme = localStorage.getItem('nm-theme') || 'light';
     } catch (e) {}
+    // Recorrido 3D del inicio: se activa salvo en iframes, con movimiento reducido o si la persona lo apagó.
+    try {
+      var pref = localStorage.getItem('nm-3d');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (pref !== 'off' && (!reduce || pref === 'on') && window.self === window.top) root.classList.add('story-3d');
+    } catch (e) {
+      root.classList.add('story-3d');
+    }
     // Si el JavaScript falla, se quita .js para que el contenido quede visible.
     setTimeout(function () {
-      if (!root.classList.contains('is-ready')) root.classList.remove('js');
+      if (!root.classList.contains('is-ready')) root.classList.remove('js', 'story-3d');
     }, 5000);
   })();
 </script>

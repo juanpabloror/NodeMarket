@@ -27,47 +27,60 @@
 
     <!--@include scene-->
 
-    <main id="contenido" data-page="contacto" data-formation="converge">
-      <section class="page-hero container">
+    <main id="contenido" data-page="contacto" data-room data-formation="converge">
+      <section class="page-hero page-hero--room container">
         <p data-reveal class="eyebrow">Contacto</p>
-        <h1 data-split>Conectemos tu negocio</h1>
+        <h1 data-split>Conectemos tu <em>negocio</em></h1>
         <p data-reveal>Escríbenos directo por WhatsApp o cuéntanos con el formulario y te respondemos por ahí.</p>
       </section>
 
-      <section class="section container">
-        <div class="grid-2">
-          <div>
-            <a
-              data-reveal class="btn btn--accent btn--lg"
-              href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
-              target="_blank"
-              rel="noopener"
-            >
-              Hablar por WhatsApp
-            </a>
-            <p data-reveal class="hero__lead" style="margin-top: var(--space-md)">
-              También puedes escribirnos a
-              <a href="mailto:{{ site.contacto.email }}">{{ site.contacto.email }}</a>.
-            </p>
-          </div>
+      <div class="room-ui">
+        <p class="story__meta" aria-hidden="true">
+          <span class="story__scene-name">El teléfono de la oficina</span>
+          <span class="story__rule"></span>
+          <span class="story__count">Contacto</span>
+        </p>
+        <button type="button" class="story__toggle3d" data-toggle-3d>Vista sin 3D</button>
+        <button type="button" class="hotspot" data-hotspot="phone" data-scroll-to=".room-panel"><span class="hotspot__pill"><span class="hotspot__dot" aria-hidden="true">↗</span>Escríbenos</span></button>
+      </div>
 
-          <form data-reveal id="contact-form" data-whatsapp="{{ site.contacto.whatsappNumero }}" novalidate>
-            <div class="form-field">
-              <label for="nombre">Tu nombre</label>
-              <input type="text" id="nombre" name="nombre" required autocomplete="name" />
+      <div class="room-panel" data-lenis-prevent tabindex="0" role="region" aria-label="Contenido de la página">
+  
+        <section class="section container">
+          <div class="grid-2">
+            <div>
+              <a
+                data-reveal class="btn btn--accent btn--lg"
+                href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+                target="_blank"
+                rel="noopener"
+              >
+                Hablar por WhatsApp
+              </a>
+              <p data-reveal class="hero__lead" style="margin-top: var(--space-md)">
+                También puedes escribirnos a
+                <a href="mailto:{{ site.contacto.email }}">{{ site.contacto.email }}</a>.
+              </p>
             </div>
-            <div class="form-field">
-              <label for="negocio">Nombre de tu negocio</label>
-              <input type="text" id="negocio" name="negocio" required autocomplete="organization" />
-            </div>
-            <div class="form-field">
-              <label for="mensaje">¿Qué necesita tu negocio?</label>
-              <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn--accent">Enviar por WhatsApp</button>
-          </form>
-        </div>
-      </section>
+  
+            <form data-reveal id="contact-form" data-whatsapp="{{ site.contacto.whatsappNumero }}" novalidate>
+              <div class="form-field">
+                <label for="nombre">Tu nombre</label>
+                <input type="text" id="nombre" name="nombre" required autocomplete="name" />
+              </div>
+              <div class="form-field">
+                <label for="negocio">Nombre de tu negocio</label>
+                <input type="text" id="negocio" name="negocio" required autocomplete="organization" />
+              </div>
+              <div class="form-field">
+                <label for="mensaje">¿Qué necesita tu negocio?</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--accent">Enviar por WhatsApp</button>
+            </form>
+          </div>
+        </section>
+      </div>
     </main>
 
     <!--@include footer-->

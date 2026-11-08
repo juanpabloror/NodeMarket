@@ -1,3 +1,3 @@
-import { definePage } from '../dom/page.js';
+import { defineRoomPage } from '../dom/room.js';
 
-export const { init, destroy } = definePage();
+export const { init, destroy } = defineRoomPage(6);

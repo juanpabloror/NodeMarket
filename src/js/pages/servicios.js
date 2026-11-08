@@ -1,8 +1,8 @@
-import { definePage } from '../dom/page.js';
+import { defineRoomPage } from '../dom/room.js';
 import { setState } from '../../state.js';
 
 // Hover/foco en una tarjeta ilumina su constelación en la escena.
-export const { init, destroy } = definePage((container) => {
+export const { init, destroy } = defineRoomPage(3, (container) => {
   const cleanups = [...container.querySelectorAll('.service-card')].flatMap((card, index) => {
     const enter = () => setState({ activeGroup: index });
     const leave = () => setState({ activeGroup: -1 });

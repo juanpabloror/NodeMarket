@@ -27,51 +27,64 @@
 
     <!--@include scene-->
 
-    <main id="contenido" data-page="paquetes" data-formation="ruta">
-      <section class="page-hero container">
+    <main id="contenido" data-page="paquetes" data-room data-formation="ruta">
+      <section class="page-hero page-hero--room container">
         <p data-reveal class="eyebrow">Paquetes</p>
-        <h1 data-split>Una ruta clara, sin letras chiquitas</h1>
+        <h1 data-split>Una ruta clara, sin <em>letras chiquitas</em></h1>
         <p data-reveal>Empezamos con un piloto para 3 negocios. Conforme avanzamos, se abren nuevas etapas.</p>
       </section>
 
-      <section class="section container">
-        <div data-stagger class="pricing-path">
-          <!--@each pricing.stages as stage-->
-          <article
-            class="pricing-stage"
-            data-stage="{{ stage.id }}"
-            data-estado="{{ stage.estado }}"
-            data-cupo-total="{{ stage.cupoTotal }}"
-            data-cupo-disponible="{{ stage.cupoDisponible }}"
-          >
-            <span class="pricing-stage__node"></span>
-            <span class="badge badge--{{ stage.estado }}">{{ stage.condicion }}</span>
-            <h2 class="pricing-stage__name">{{ stage.nombre }}</h2>
-            <p class="pricing-stage__precio">{{ stage.implementacion | mxn:stage.implementacionTexto }}</p>
-            <p class="pricing-stage__mensualidad">{{ stage.mensualidad | mxn:stage.mensualidadTexto }}{{ stage.mensualidadSufijo }}</p>
-            <p class="pricing-stage__cupo">{{ stage.cupoTexto }}</p>
-          </article>
-          <!--@endeach-->
-        </div>
-        <p data-reveal class="hero__lead" style="margin-top: var(--space-lg)">{{ pricing.leyenda }}</p>
-      </section>
+      <div class="room-ui">
+        <p class="story__meta" aria-hidden="true">
+          <span class="story__scene-name">La repisa de etapas</span>
+          <span class="story__rule"></span>
+          <span class="story__count">Paquetes</span>
+        </p>
+        <button type="button" class="story__toggle3d" data-toggle-3d>Vista sin 3D</button>
+        <button type="button" class="hotspot" data-hotspot="shelf" data-scroll-to=".room-panel"><span class="hotspot__pill"><span class="hotspot__dot" aria-hidden="true">+</span>Elige tu etapa</span></button>
+      </div>
 
-      <section class="section section--veil">
-        <div class="container">
-          <div class="section__head">
-            <p data-reveal class="eyebrow">¿Listo para empezar?</p>
-            <h2 data-split>Aparta uno de los 3 lugares del piloto</h2>
+      <div class="room-panel" data-lenis-prevent tabindex="0" role="region" aria-label="Contenido de la página">
+  
+        <section class="section container">
+          <div data-stagger class="pricing-path">
+            <!--@each pricing.stages as stage-->
+            <article
+              class="pricing-stage"
+              data-stage="{{ stage.id }}"
+              data-estado="{{ stage.estado }}"
+              data-cupo-total="{{ stage.cupoTotal }}"
+              data-cupo-disponible="{{ stage.cupoDisponible }}"
+            >
+              <span class="pricing-stage__node"></span>
+              <span class="badge badge--{{ stage.estado }}">{{ stage.condicion }}</span>
+              <h2 class="pricing-stage__name">{{ stage.nombre }}</h2>
+              <p class="pricing-stage__precio">{{ stage.implementacion | mxn:stage.implementacionTexto }}</p>
+              <p class="pricing-stage__mensualidad">{{ stage.mensualidad | mxn:stage.mensualidadTexto }}{{ stage.mensualidadSufijo }}</p>
+              <p class="pricing-stage__cupo">{{ stage.cupoTexto }}</p>
+            </article>
+            <!--@endeach-->
           </div>
-          <a
-            data-reveal class="btn btn--accent btn--lg"
-            href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
-            target="_blank"
-            rel="noopener"
-          >
-            Hablar por WhatsApp
-          </a>
-        </div>
-      </section>
+          <p data-reveal class="hero__lead" style="margin-top: var(--space-lg)">{{ pricing.leyenda }}</p>
+        </section>
+  
+        <section class="section section--veil">
+          <div class="container">
+            <div class="section__head">
+              <p data-reveal class="eyebrow">¿Listo para empezar?</p>
+              <h2 data-split>Aparta uno de los 3 lugares del piloto</h2>
+            </div>
+            <a
+              data-reveal class="btn btn--accent btn--lg"
+              href="https://wa.me/{{ site.contacto.whatsappNumero }}?text={{ site.contacto.whatsappMensaje | enc }}"
+              target="_blank"
+              rel="noopener"
+            >
+              Hablar por WhatsApp
+            </a>
+          </div>
+        </section>
+      </div>
     </main>
 
     <!--@include footer-->
